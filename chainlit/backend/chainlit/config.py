@@ -262,7 +262,7 @@ class ChainlitConfig:
 
     def load_translation(self, language: str):
         translation = {}
-        default_language = "en-US"
+        default_language = "zh-CN"
 
         translation_lib_file_path = os.path.join(
             config_translation_dir, f"{language}.json"

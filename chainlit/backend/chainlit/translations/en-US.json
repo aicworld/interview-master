@@ -50,7 +50,7 @@
         },
         "inputBox": {
           "input": {
-            "placeholder": "说点什么"
+            "placeholder": "Say something"
           },
           "speechButton": {
             "start": "Start recording",
