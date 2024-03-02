@@ -42,7 +42,8 @@ class MessageBase(ABC):
     wait_for_answer = False
     indent: Optional[int] = None
     generation: Optional[BaseGeneration] = None
-
+    score: Optional[int] = None 
+    
     def __post_init__(self) -> None:
         trace_event(f"init {self.__class__.__name__}")
         self.thread_id = context.session.thread_id
@@ -86,7 +87,7 @@ class MessageBase(ABC):
         }
 
         return _dict
-
+    
     async def update(
         self,
     ):
@@ -203,6 +204,7 @@ class Message(MessageBase):
         self,
         content: Union[str, Dict],
         author: str = config.ui.name,
+        score: Optional[int] = None,
         language: Optional[str] = None,
         actions: Optional[List[Action]] = None,
         elements: Optional[List[ElementBased]] = None,
@@ -233,7 +235,7 @@ class Message(MessageBase):
 
         if created_at:
             self.created_at = created_at
-
+        self.score = score
         self.author = author
         self.type = type
         self.actions = actions if actions is not None else []
@@ -260,7 +262,17 @@ class Message(MessageBase):
         await asyncio.gather(*tasks)
 
         return self.id
-
+    
+    async def send_with_score(self):
+        """Send the message along with the score."""
+        # Use your existing message sending logic here
+        # For example, to send as a combined payload:
+        payload = {
+            "message": self.content,
+            "score": self.score
+        }
+        await context.emitter.send_step(payload)
+        
     async def update(self):
         """
         Send the message to the UI and persist it in the cloud if a project ID is configured.
@@ -542,7 +554,7 @@ class AskActionMessage(AskMessageBase):
         if res is None:
             self.content = "Timed out: no action was taken"
         else:
-            self.content = f'**Selected action:** {res["label"]}'
+            self.content = f'**选择难度:** {res["label"]}'
 
         self.wait_for_answer = False
 
