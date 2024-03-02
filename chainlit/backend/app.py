@@ -5,13 +5,17 @@ from pydantic import BaseModel
 import sqlite3
 from typing import List, Dict
 # Assuming OpenAI and hypothetical Chainlit imports are correct
-from openai import OpenAI
+from openai import AsyncOpenAI
 from chainlit.server import app
 from chainlit.input_widget import Select, Slider, Switch
 import re
+from chainlit.context import init_http_context
+from chainlit.context import init_ws_context
+from chainlit.session import WebsocketSession
+from fastapi import Request
+from fastapi.responses import JSONResponse
 
-
-client = OpenAI(
+client = AsyncOpenAI(
     api_key="",
     base_url="https://api.moonshot.cn/v1",
 )
@@ -58,6 +62,7 @@ async def get_scenarios():
 
 @cl.on_chat_start
 async def on_chat_start():
+    print("Session id:", cl.user_session.get("id"))
     cl.user_session.set("counter", 0)
     cl.user_session.set("score", 10)
     await cl.Message(content="你好 请介绍下你自己").send()
@@ -86,16 +91,17 @@ async def on_chat_start():
     ).send()
     cl.user_session.set("difficulty", result['label'])
 
-# @cl.set_chat_profiles
-# async def chat_profile(score):
-#     if score == None:
-#         score = 10
-#     return [
-#         cl.Progress(
-#             current_number = score,
-#             total_number = 100,
-#         ),
-#     ]
+@cl.set_chat_profiles
+async def chat_profile(score=None):
+    # Set current_number to score if score is not None, else set it to 10
+    current_number = score if score is not None else 10
+    return [
+        # cl.Progress(
+        #     current_number=current_number,
+        #     total_number=100,
+        # ),
+    ]
+
 
 def switch_difficulty(difficulty):
     if difficulty == "easy":
@@ -116,7 +122,6 @@ def extract_last_bracket_number_and_preceding_text(text):
     else:
         return None, text  # 如果没有匹配到，返回None和原文本
 
-
 @cl.on_message
 async def on_message(message: cl.Message):
     counter = cl.user_session.get("counter") + 1
@@ -128,7 +133,11 @@ async def on_message(message: cl.Message):
     difficulty_v2 = difficulty * 0.3
     difficulty_v3 = difficulty * 0.2
     difficulty_v4 = difficulty * 0.1
-    completion = client.chat.completions.create(
+
+    msg = cl.Message(content="")
+    await msg.send()
+
+    stream = await client.chat.completions.create(
         model="moonshot-v1-8k",
         messages=[
             {"role": "system", "content": '''你是一个高级面试机器人，专为评估潜在的 Golang 工程师的技术能力、编程经验以及对待工作的态度而设计。
@@ -145,13 +154,20 @@ async def on_message(message: cl.Message):
             {"role": "user", "content": user_input}
         ],
         temperature=0,
+        stream = True,
     )
-    return_text = completion.choices[0].message.content
-    score,result = extract_last_bracket_number_and_preceding_text(return_text)
+    async for part in stream:
+        print(part.choices[0])
+        if token := part.choices[0].delta.content :  # Assuming `.text` or similar attribute holds the response part
+            await msg.stream_token(token)
 
-    # Send the model's response for the first message
-    await cl.Message(content=result).send()
-    cl.user_session.set("score", cl.user_session.get("score") + score)
-    
-    # chat_profile()
-    print(cl.user_session.get("score"))
+    await msg.update()
+    score,result = extract_last_bracket_number_and_preceding_text(msg.content)
+
+    if score is not None:
+
+        cl.user_session.set("score", cl.user_session.get("score") + score - difficulty/2)
+        # chat_profile()
+        new_score = cl.user_session.get("score")
+
+        await chat_profile(score=new_score)
