@@ -1,5 +1,5 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
-
+import Choose from 'pages/Choose';
 import AuthCallback from 'pages/AuthCallback';
 import Element from 'pages/Element';
 import Env from 'pages/Env';
@@ -11,6 +11,10 @@ import Thread from 'pages/Thread';
 export const router = createBrowserRouter([
   {
     path: '/',
+    element: <Choose />
+  },
+  {
+    path: '/home/:param',
     element: <Home />
   },
   {

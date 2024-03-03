@@ -78,14 +78,17 @@ const Nav = ({ dataPersistence, hasReadme, matches }: NavProps) => {
     anchorEl = ref.current;
   }
 
+  // const tabs = [{ to: '/', label: t('components.organisms.header.chat') }];
   const tabs = [{ to: '/', label: t('components.organisms.header.chat') }];
 
-  if (hasReadme) {
-    tabs.push({
-      to: '/readme',
-      label: t('components.organisms.header.readme')
-    });
-  }
+
+  console.log( tabs )
+  // if (hasReadme) {
+  //   tabs.push({
+  //     to: '/readme',
+  //     label: t('components.organisms.header.readme')
+  //   });
+  // }
 
   const nav = (
     <Stack direction={matches ? 'column' : 'row'} spacing={1}>
@@ -100,6 +103,7 @@ const Nav = ({ dataPersistence, hasReadme, matches }: NavProps) => {
     </Stack>
   );
 
+  // 是否是移动端显示
   if (matches) {
     return (
       <>
@@ -160,13 +164,16 @@ const Header = memo(
             borderBottomColor: (theme) => theme.palette.divider
           }}
         >
+          {/* icon与nav显示位置 */}
           <Stack alignItems="center" direction={'row'} gap={!matches ? 3 : 0}>
-            {!matches ? <Logo style={{ maxHeight: '25px' }} /> : null}
-            <Nav
+            
+            {/* {!matches ? <Logo style={{ maxHeight: '25px' }} /> : null} */}
+            <Logo style={{ maxHeight: '25px' }} />
+            {/* <Nav
               matches={matches}
               dataPersistence={projectSettings?.dataPersistence}
               hasReadme={!!projectSettings?.markdown}
-            />
+            /> */}
           </Stack>
           <Stack
             alignItems="center"
