@@ -248,6 +248,30 @@ async def process_message(session: WebsocketSession, payload: UIMessagePayload):
     finally:
         await context.emitter.task_end()
 
+@socket.on('select_senario')
+async def handle_route_change(self, sid, id):
+    """Handle select senario events and set up the prompt based on the route."""
+    # Example: Determine the prompt based on route_info['route'] or route_info['context']
+
+    context = init_ws_context(sid)
+
+    if context.session.restored:
+        return
+    
+    prompt = self.determine_prompt(id)
+    
+    # Store the prompt in the session or pass it to the message handling logic
+    self.session.current_prompt = prompt
+    
+    logger.info(f"Route changed to {id}. Prompt set to: {prompt}")
+
+def determine_prompt(self, id):
+    """Determine the message prompt based on route information."""
+    # Example logic to determine the prompt
+    if id == 1:
+        return "Specific prompt for new-route"
+    else:
+        return "Default prompt"
 
 @socket.on("ui_message")
 async def message(sid, payload: UIMessagePayload):
@@ -256,6 +280,7 @@ async def message(sid, payload: UIMessagePayload):
     session.should_stop = False
 
     await process_message(session, payload)
+
 
 
 async def process_action(action: Action):

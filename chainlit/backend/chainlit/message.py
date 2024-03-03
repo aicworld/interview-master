@@ -213,6 +213,7 @@ class Message(MessageBase):
         generation: Optional[BaseGeneration] = None,
         id: Optional[str] = None,
         created_at: Union[str, None] = None,
+        round: Optional[int] = None,
     ):
         time.sleep(0.001)
         self.language = language
@@ -241,7 +242,7 @@ class Message(MessageBase):
         self.actions = actions if actions is not None else []
         self.elements = elements if elements is not None else []
         self.disable_feedback = disable_feedback
-
+        self.score = 0
         super().__post_init__()
 
     async def send(self) -> str:
@@ -262,17 +263,40 @@ class Message(MessageBase):
         await asyncio.gather(*tasks)
 
         return self.id
+    async def get_score(self) -> Optional[int]:
+        return self.score
     
+    async def set_score(self, new_score: int):
+        self.score = new_score
+    
+    async def set_round(self, round: int):
+        self.round = round
+
+    async def get_round(self) -> Optional[int]:
+        return self.round
+
     async def send_with_score(self):
         """Send the message along with the score."""
+        trace_event("send_message")
+        await super().send()
+        context.session.root_message = self
         # Use your existing message sending logic here
         # For example, to send as a combined payload:
+
         payload = {
             "message": self.content,
-            "score": self.score
+            "score": self.score,
+            "round": self.round,
         }
         await context.emitter.send_step(payload)
-        
+
+         # Create tasks for all actions and elements
+        tasks = [action.send(for_id=self.id) for action in self.actions]
+        tasks.extend(element.send(for_id=self.id) for element in self.elements)
+
+        # Run all tasks concurrently
+        await asyncio.gather(*tasks)
+
     async def update(self):
         """
         Send the message to the UI and persist it in the cloud if a project ID is configured.

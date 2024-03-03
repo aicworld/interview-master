@@ -345,3 +345,4 @@ class ChainlitEmitter(BaseChainlitEmitter):
         return self.emit(
             "action_response", {"id": id, "status": status, "response": response}
         )
+    
