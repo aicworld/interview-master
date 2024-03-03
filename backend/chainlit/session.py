@@ -163,6 +163,8 @@ class WebsocketSession(BaseSession):
         root_message: Optional["Message"] = None,
         # Chat profile selected before the session was created
         chat_profile: Optional[str] = None,
+        career: Optional[str] = None,
+        current_prompt: Optional[str] = None,
     ):
         super().__init__(
             id=id,
@@ -181,7 +183,8 @@ class WebsocketSession(BaseSession):
 
         self.should_stop = False
         self.restored = False
-
+        self.career = ""
+        self.current_prompt = ""
         self.thread_queues = {}  # type: Dict[str, Deque[Callable]]
         self.files = {}  # type: Dict[str, "FileDict"]
 
