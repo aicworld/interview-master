@@ -66,30 +66,6 @@ async def on_chat_start():
     cl.user_session.set("counter", 0)
     cl.user_session.set("score", 10)
     await cl.Message(content="你好 请介绍下你自己").send()
-    result = await cl.AskActionMessage(
-        content="请选择难度",
-        actions=[
-            cl.Action(
-                id="easy",
-                name="easy",
-                value="easy",
-                label="简单",
-            ),
-            cl.Action(
-                id="medium",
-                name="medium",
-                value="medium",
-                label="中等",
-            ),
-            cl.Action(
-                id="hard",
-                name="hard",
-                value="hard",
-                label="困难",
-            ),
-        ],
-    ).send()
-    cl.user_session.set("difficulty", result['label'])
 
 @cl.set_chat_profiles
 async def chat_profile(score=None):
