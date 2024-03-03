@@ -105,9 +105,9 @@ async def chat_profile(score=None):
 
 def switch_difficulty(difficulty):
     if difficulty == "easy":
-        return 60
-    elif difficulty == "medium":
         return 40
+    elif difficulty == "medium":
+        return 30
     elif difficulty == "hard":
         return 20
     return 20
@@ -135,6 +135,7 @@ async def on_message(message: cl.Message):
     difficulty_v4 = difficulty * 0.1
 
     msg = cl.Message(content="")
+    await msg.set_round(counter)
     await msg.send()
 
     stream = await client.chat.completions.create(
@@ -157,17 +158,10 @@ async def on_message(message: cl.Message):
         stream = True,
     )
     async for part in stream:
-        print(part.choices[0])
         if token := part.choices[0].delta.content :  # Assuming `.text` or similar attribute holds the response part
             await msg.stream_token(token)
 
-    await msg.update()
+    await msg.send_with_score()
+    
     score,result = extract_last_bracket_number_and_preceding_text(msg.content)
-
-    if score is not None:
-
-        cl.user_session.set("score", cl.user_session.get("score") + score - difficulty/2)
-        # chat_profile()
-        new_score = cl.user_session.get("score")
-
-        await chat_profile(score=new_score)
+    await msg.set_score(await msg.get_score()+score - difficulty/2)
