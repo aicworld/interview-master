@@ -1,0 +1,155 @@
+{
+    "components": {
+        "atoms": {
+            "buttons": {
+                "userButton": {
+                    "menu": {
+                        "settings": "\u8bbe\u7f6e",
+                        "settingsKey": "S",
+                        "APIKeys": "API\u5bc6\u94a5",
+                        "logout": "\u767b\u51fa"
+                    }
+                }
+            }
+        },
+        "molecules": {
+            "newChatButton": {
+                "newChat": "\u65b0\u804a\u5929"
+            },
+            "tasklist": {
+                "TaskList": {
+                    "title": "\ud83d\udd12 Task List",
+                    "loading": "\u52a0\u8f7d\u4e2d...",
+                    "error": "\u53d1\u751f\u4e86\u4e00\u4e2a\u9519\u8bef"
+                }
+            },
+            "attachments": {
+                "cancelUpload": "\u53d6\u6d88\u4e0a\u4f20",
+                "removeAttachment": "\u79fb\u9664\u9644\u4ef6"
+            },
+            "newChatDialog": {
+                "createNewChat": "\u521b\u5efa\u65b0\u804a\u5929\uff1f",
+                "clearChat": "\u8fd9\u5c06\u6e05\u9664\u5f53\u524d\u6d88\u606f\u5e76\u5f00\u59cb\u65b0\u7684\u804a\u5929\u3002",
+                "cancel": "\u53d6\u6d88",
+                "confirm": "\u786e\u8ba4"
+            },
+            "settingsModal": {
+                "expandMessages": "\u5c55\u5f00\u6d88\u606f",
+                "hideChainOfThought": "\u9690\u85cf\u601d\u7ef4\u94fe",
+                "darkMode": "\u6697\u9ed1\u6a21\u5f0f"
+            }
+        },
+        "organisms": {
+            "chat": {
+                "history": {
+                    "index": {
+                        "lastInputs": "\u4e0a\u6b21\u8f93\u5165",
+                        "noInputs": "\u7a7a\u7a7a\u5982\u4e5f...",
+                        "loading": "\u52a0\u8f7d\u4e2d..."
+                    }
+                },
+                "inputBox": {
+                    "input": {
+                        "placeholder": "\u5728\u6b64\u8f93\u5165\u60a8\u7684\u6d88\u606f..."
+                    },
+                    "speechButton": {
+                        "start": "\u5f00\u59cb\u5f55\u97f3",
+                        "stop": "\u505c\u6b62\u5f55\u97f3"
+                    },
+                    "SubmitButton": {
+                        "sendMessage": "\u53d1\u9001\u6d88\u606f",
+                        "stopTask": "\u505c\u6b62\u4efb\u52a1"
+                    },
+                    "UploadButton": {
+                        "attachFiles": "\u9644\u52a0\u6587\u4ef6"
+                    },
+                    "waterMark": {
+                        "text": "\u4f7f\u7528\u4ee5\u4e0b\u6784\u5efa"
+                    }
+                },
+                "Messages": {
+                    "index": {
+                        "running": "\u8fd0\u884c\u4e2d",
+                        "executedSuccessfully": "\u6267\u884c\u6210\u529f",
+                        "failed": "\u5931\u8d25",
+                        "feedbackUpdated": "\u53cd\u9988\u5df2\u66f4\u65b0",
+                        "updating": "\u66f4\u65b0\u4e2d"
+                    }
+                },
+                "dropScreen": {
+                    "dropYourFilesHere": "\u5c06\u6587\u4ef6\u62d6\u5230\u6b64\u5904"
+                },
+                "index": {
+                    "failedToUpload": "\u4e0a\u4f20\u5931\u8d25",
+                    "cancelledUploadOf": "\u53d6\u6d88\u4e86\u4e0a\u4f20",
+                    "couldNotReachServer": "\u65e0\u6cd5\u8fde\u63a5\u5230\u670d\u52a1\u5668",
+                    "continuingChat": "\u7ee7\u7eed\u4e0a\u4e00\u6b21\u7684\u804a\u5929"
+                },
+                "settings": {
+                    "settingsPanel": "\u8bbe\u7f6e\u9762\u677f",
+                    "reset": "\u91cd\u7f6e",
+                    "cancel": "\u53d6\u6d88",
+                    "confirm": "\u786e\u8ba4"
+                }
+            },
+            "threadHistory": {
+                "sidebar": {
+                    "filters": {
+                        "FeedbackSelect": {
+                            "feedbackAll": "\u53cd\u9988\uff1a\u5168\u90e8",
+                            "feedbackPositive": "\u53cd\u9988\uff1a\u79ef\u6781",
+                            "feedbackNegative": "\u53cd\u9988\uff1a\u6d88\u6781"
+                        },
+                        "SearchBar": {
+                            "search": "\u641c\u7d22"
+                        }
+                    },
+                    "DeleteThreadButton": {
+                        "confirmMessage": "\u8fd9\u5c06\u5220\u9664\u8be5\u7ebf\u7a0b\u4ee5\u53ca\u5176\u6d88\u606f\u548c\u5143\u7d20\u3002",
+                        "cancel": "\u53d6\u6d88",
+                        "confirm": "\u786e\u8ba4",
+                        "deletingChat": "\u6b63\u5728\u5220\u9664\u804a\u5929",
+                        "chatDeleted": "\u804a\u5929\u5df2\u5220\u9664"
+                    },
+                    "index": {
+                        "pastChats": "\u8fc7\u5f80\u804a\u5929"
+                    },
+                    "ThreadList": {
+                        "empty": "\u7a7a..."
+                    },
+                    "TriggerButton": {
+                        "closeSidebar": "\u5173\u95ed\u4fa7\u8fb9\u680f",
+                        "openSidebar": "\u6253\u5f00\u4fa7\u8fb9\u680f"
+                    }
+                },
+                "Thread": {
+                    "backToChat": "\u8fd4\u56de\u804a\u5929",
+                    "chatCreatedOn": "\u6b64\u804a\u5929\u521b\u5efa\u4e8e"
+                }
+            },
+            "header": {
+                "chat": "\u804a\u5929",
+                "readme": "\u81ea\u8ff0"
+            }
+        }
+    },
+    "hooks": {
+        "useLLMProviders": {
+            "failedToFetchProviders": "\u83b7\u53d6\u63d0\u4f9b\u8005\u5931\u8d25\uff1a"
+        }
+    },
+    "pages": {
+        "Design": {},
+        "Env": {
+            "savedSuccessfully": "\u4fdd\u5b58\u6210\u529f",
+            "requiredApiKeys": "\u6240\u9700\u7684API\u5bc6\u94a5",
+            "requiredApiKeysInfo": "\u8981\u4f7f\u7528\u6b64\u5e94\u7528\u7a0b\u5e8f\uff0c\u9700\u8981\u4ee5\u4e0bAPI\u5bc6\u94a5\u3002\u5bc6\u94a5\u5b58\u50a8\u5728\u8bbe\u5907\u7684\u672c\u5730\u5b58\u50a8\u4e2d\u3002"
+        },
+        "Page": {
+            "notPartOfProject": "\u60a8\u4e0d\u662f\u6b64\u9879\u76ee\u7684\u4e00\u90e8\u5206\u3002"
+        },
+        "ResumeButton": {
+            "resumeChat": "\u7ee7\u7eed\u804a\u5929"
+        }
+    }
+}
