@@ -37,18 +37,16 @@ export default function Choose() {
 
 
   // 难度选择
-  const handleChipClick = () => {
-    console.info('You clicked the Chip.');
+  const [levelState, setLevelState] = useState('easy')
+  const handleChipClick = (level: string) => {
+    setLevelState(level)
   };
 
   const [interviewChooseSelected, setInterviewChooseSelected] = useState(false);
-  function handleChooseInterview (event: React.MouseEvent<HTMLButtonElement>) {  // ts语法表示类似event
-    // 当前选择面试的按钮
-    const curChooseInterviewButton = event.currentTarget.innerText; // 获取按钮的内容
+  function handleChooseInterview (scense: number) {  // ts语法表示类似event
     setInterviewChooseSelected(!interviewChooseSelected)
-    console.log("/home/"+curChooseInterviewButton)
     // 传递当前选择的面试场景给后端，并跳转至模拟面试界面
-    navigate("home/1"+{curChooseInterviewButton})
+    navigate("home/"+{scense}+'/'+{levelState})
   }
 
 
@@ -106,27 +104,64 @@ export default function Choose() {
               <Stack spacing={1}>
                   {/* 难度等级选择 */}
                   <span style={{fontSize:'0.65rem'}}> 难度选择 </span>
-                  <div style={{ display: 'flex', gridTemplateColumns: 'repeat(3, auto)', columnGap: '0.5rem' }}>
-                    <Chip style={{ width: '3.5rem' }} label="初级" variant="outlined" onClick={handleChipClick} />
-                    <Chip style={{ width: '3.5rem' }} label="中级" variant="outlined" onClick={handleChipClick} />
-                    <Chip style={{ width: '3.5rem' }} label="高级" variant="outlined" onClick={handleChipClick} />
+                  <div style={{ display: 'flex', gridTemplateColumns: 'repeat(3, auto)', columnGap: '0.5rem' }}> 
+                    <Chip
+                      style={{ width: '3.5rem' }}
+                      label="初级"
+                      color={levelState === 'easy' ? "primary" : "default"}
+                      variant="outlined"
+                      onClick={() => handleChipClick('easy')}
+                    />
+                    <Chip
+                      style={{ width: '3.5rem'}}
+                      label="中级"
+                      color={levelState === 'medium' ? "primary" : "default"}
+                      variant="outlined"
+                      onClick={() => handleChipClick('medium')}
+                    />
+                    <Chip
+                      style={{ width: '3.5rem'}}
+                      label="高级"
+                      color={levelState === 'hard' ? "primary" : "default"}
+                      variant="outlined"
+                      onClick={() => handleChipClick('hard')}
+                    />
                   </div>
-                    
-                  <Button 
+                  {/* <Button 
                     variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                    onClick={handleChooseInterview} // 添加点击事件
+                    onClick={() => handleChooseInterview(1)}
                   >Golang工程师模拟面试</Button>
 
                   <Button variant="outlined">产品经理模拟面试</Button>
                   <Button variant="outlined">运维工程师模拟面试</Button>
                   <Button variant="outlined">UI模拟面试</Button>
-                  <Button variant="outlined">前端模拟面试</Button>
+                  <Button variant="outlined">前端模拟面试</Button> */}
 
-                  <Button variant="outlined">Golang工程师模拟面试</Button>
+
+                {industrySelectValue.includes('Golang') && (
+                  <Button
+                    variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                    onClick={() => handleChooseInterview(1)}
+                  >
+                    Golang工程师模拟面试
+                  </Button>
+                )}
+                {industrySelectValue.includes('产品经理') && (
                   <Button variant="outlined">产品经理模拟面试</Button>
+                )}
+                {industrySelectValue.includes('运维工程师') && (
                   <Button variant="outlined">运维工程师模拟面试</Button>
+                )}
+                {industrySelectValue.includes('UI') && (
                   <Button variant="outlined">UI模拟面试</Button>
-                  <Button variant="outlined" onClick={handleChooseInterview}>前端模拟面试</Button>
+                )}
+                {industrySelectValue.includes('前端') && (
+                  <Button variant="outlined">前端模拟面试</Button>
+                )}
+
+
+
+
               </Stack>
         </main>
       </div>
