@@ -258,7 +258,7 @@ async def handle_route_change(self, sid, id,career,difficulty):
     if context.session.restored:
         return
     
-    prompt = self.determine_prompt(id,difficulty)
+    prompt = self.determine_prompt(id,career,difficulty)
     session = WebsocketSession.require(sid)
 
     session.career = career
@@ -277,7 +277,7 @@ def switch_difficulty(difficulty):
         return 20
     return 40
 
-def determine_prompt(self, id,difficulty_value):
+def determine_prompt(self, id,career,difficulty_value):
 
     """Determine the message prompt based on route information."""
     # Example logic to determine the prompt
@@ -288,7 +288,7 @@ def determine_prompt(self, id,difficulty_value):
     difficulty_v4 = difficulty * 0.1
     
     if id == 1:
-        return '''你是一个高级面试机器人，专为评估潜在的 Golang 工程师的技术能力、编程经验以及对待工作的态度而设计。
+        return '''你是一个高级面试机器人，专为评估潜在的{career}的技术能力、编程经验以及对待工作的态度而设计。
             你的主要任务是通过一系列设计精良的问题，深入了解候选人的技术背景、解决问题的能力、以往的项目经验以及他们对于这个职位的兴趣和热情。
             在收集到的信息基础上，你需要综合考虑，按照0到{difficulty}的分数范围给出一个总体评分，这个评分应反映候选人的综合实力和这个职位的契合度。
             此外，每次回答之后，你需要根据候选人的回答内容和质量，提出一个新的、更深入的问题，以进一步评估候选人的能力。
