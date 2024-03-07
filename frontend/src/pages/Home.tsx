@@ -31,7 +31,6 @@ export default function Home() {
 
   return (
     <Page>
-      {/* 参数后面补充感叹号是一种ts的类型断言，强调元素类型 */}
       <Chat />  
     </Page>
   );
