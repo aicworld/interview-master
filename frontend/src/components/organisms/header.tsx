@@ -80,9 +80,6 @@ const Nav = ({ dataPersistence, hasReadme, matches }: NavProps) => {
 
   // const tabs = [{ to: '/', label: t('components.organisms.header.chat') }];
   const tabs = [{ to: '/', label: t('components.organisms.header.chat') }];
-
-
-  console.log( tabs )
   // if (hasReadme) {
   //   tabs.push({
   //     to: '/readme',
