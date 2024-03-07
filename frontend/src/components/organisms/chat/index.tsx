@@ -10,9 +10,10 @@ import {
   threadHistoryState,
   useChatData,
   useChatInteract,
-  useChatSession
+  useChatSession,
+  IStep
 } from '@chainlit/react-client';
-import { ErrorBoundary, useUpload } from '@chainlit/react-components';
+import { ErrorBoundary, useUpload} from '@chainlit/react-components';
 
 import SideView from 'components/atoms/element/sideView';
 import { Translator } from 'components/i18n';
@@ -28,15 +29,7 @@ import DropScreen from './dropScreen';
 import InputBox from './inputBox';
 
 
-type sceneProps = {
-  scene: string;
-  level: string;
-};
-
-const Chat: React.FC<sceneProps> = ({ scene, level }) => {
-
-
-  console.log(scene, level)
+const Chat: React.FC = () => {
 
   const { idToResume } = useChatSession();
 
