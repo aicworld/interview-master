@@ -14,7 +14,6 @@ export default function Home() {
   
   //初始化模拟面试场景，只执行一次
   if (scene !== undefined && level !== undefined) {
-    //初始化模拟面试场景，只执行一次
     const { sendMessage } = useChatInteract();
     const placeholder: IAttachment[] = [];
     const initMessage: IStep = {
@@ -34,7 +33,6 @@ export default function Home() {
   
   return (
     <Page>
-      {/* 参数后面补充感叹号是一种ts的类型断言，强调元素类型 */}
       <Chat />  
     </Page>
   );
