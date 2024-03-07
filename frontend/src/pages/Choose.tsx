@@ -26,11 +26,14 @@ export default function Choose() {
     );
   };
 
+  console.log(industrySelectValue)
+
+
   // 下拉框选项列表
   const dropdownOptions =  [
     '技术',
     '产品',
-    '营销',
+    '设计',
     '销售'
   ];
 
@@ -127,40 +130,27 @@ export default function Choose() {
                       onClick={() => handleChipClick('hard')}
                     />
                   </div>
-                  {/* <Button 
-                    variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                    onClick={() => handleChooseInterview(1)}
-                  >Golang工程师模拟面试</Button>
 
-                  <Button variant="outlined">产品经理模拟面试</Button>
-                  <Button variant="outlined">运维工程师模拟面试</Button>
-                  <Button variant="outlined">UI模拟面试</Button>
-                  <Button variant="outlined">前端模拟面试</Button> */}
-
-
-                {industrySelectValue.includes('Golang') && (
-                  <Button
-                    variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                    onClick={() => handleChooseInterview(1)}
-                  >
-                    Golang工程师模拟面试
-                  </Button>
-                )}
-                {industrySelectValue.includes('产品经理') && (
-                  <Button variant="outlined">产品经理模拟面试</Button>
-                )}
-                {industrySelectValue.includes('运维工程师') && (
-                  <Button variant="outlined">运维工程师模拟面试</Button>
-                )}
-                {industrySelectValue.includes('UI') && (
-                  <Button variant="outlined">UI模拟面试</Button>
-                )}
-                {industrySelectValue.includes('前端') && (
-                  <Button variant="outlined">前端模拟面试</Button>
-                )}
-
-
-
+                  {industrySelectValue.filter(item => item.includes('技术')).length > 0 && (
+                    <Button
+                      variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                      onClick={() => handleChooseInterview(1)}
+                    >
+                      Golang工程师模拟面试
+                    </Button>
+                  )}
+                  {industrySelectValue.filter(item => item.includes('产品')).length > 0 && (
+                    <Button variant="outlined">产品经理模拟面试</Button>
+                  )}
+                  {industrySelectValue.filter(item => item.includes('技术')).length > 0 && (
+                    <Button variant="outlined">运维工程师模拟面试</Button>
+                  )}
+                  {industrySelectValue.filter(item => item.includes('设计')).length > 0 && (
+                    <Button variant="outlined">UI模拟面试</Button>
+                  )}
+                  {industrySelectValue.filter(item => item.includes('技术')).length > 0 && (
+                    <Button variant="outlined">前端模拟面试</Button>
+                  )}
 
               </Stack>
         </main>
