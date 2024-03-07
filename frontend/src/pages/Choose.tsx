@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Page from 'pages/Page';
 import { MenuItem, InputLabel, FormControl, Box, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Select,{SelectChangeEvent} from '@mui/material/Select';
@@ -138,16 +136,28 @@ export default function Choose() {
                     </Button>
                   )}
                   {industrySelectValue.filter(item => item.includes('产品')).length > 0 && (
-                    <Button variant="outlined">产品经理模拟面试</Button>
+                    <Button 
+                      variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                      onClick={() => handleChooseInterview(2)}
+                    >产品经理模拟面试</Button>
                   )}
                   {industrySelectValue.filter(item => item.includes('技术')).length > 0 && (
-                    <Button variant="outlined">运维工程师模拟面试</Button>
+                    <Button 
+                      variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                      onClick={() => handleChooseInterview(3)}
+                    >运维工程师模拟面试</Button>
                   )}
                   {industrySelectValue.filter(item => item.includes('设计')).length > 0 && (
-                    <Button variant="outlined">UI模拟面试</Button>
+                    <Button 
+                      variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                      onClick={() => handleChooseInterview(4)}
+                    >UI模拟面试</Button>
                   )}
                   {industrySelectValue.filter(item => item.includes('技术')).length > 0 && (
-                    <Button variant="outlined">前端模拟面试</Button>
+                    <Button 
+                      variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                      onClick={() => handleChooseInterview(5)}
+                    >前端模拟面试</Button>
                   )}
 
               </Stack>
