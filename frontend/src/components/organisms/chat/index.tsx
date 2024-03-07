@@ -27,7 +27,17 @@ import Messages from './Messages';
 import DropScreen from './dropScreen';
 import InputBox from './inputBox';
 
-const Chat = () => {
+
+type sceneProps = {
+  scene: string;
+  level: string;
+};
+
+const Chat: React.FC<sceneProps> = ({ scene, level }) => {
+
+
+  console.log(scene, level)
+
   const { idToResume } = useChatSession();
 
   const projectSettings = useRecoilValue(projectSettingsState);

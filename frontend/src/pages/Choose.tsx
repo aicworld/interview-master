@@ -14,7 +14,7 @@ export default function Choose() {
 
   const navigate = useNavigate();  // 用作界面跳转
 
-  const [industrySelectValue, setIndustrySelectValue] = useState<string[]>([]);
+  const [industrySelectValue, setIndustrySelectValue] = useState<string[]>(['技术']);
   // 用于处理下拉框选择变化的函数
   const handleSetIndustrySelectValue = (event: SelectChangeEvent<typeof industrySelectValue>) => {
     const {
@@ -26,10 +26,8 @@ export default function Choose() {
     );
   };
 
-  console.log(industrySelectValue)
 
-
-  // 下拉框选项列表
+  // 行业选择
   const dropdownOptions =  [
     '技术',
     '产品',
@@ -40,16 +38,16 @@ export default function Choose() {
 
 
   // 难度选择
-  const [levelState, setLevelState] = useState('easy')
+  const [level, setLevel] = useState('easy')
   const handleChipClick = (level: string) => {
-    setLevelState(level)
+    setLevel(level)
   };
 
   const [interviewChooseSelected, setInterviewChooseSelected] = useState(false);
   function handleChooseInterview (scense: number) {  // ts语法表示类似event
     setInterviewChooseSelected(!interviewChooseSelected)
     // 传递当前选择的面试场景给后端，并跳转至模拟面试界面
-    navigate("home/"+{scense}+'/'+{levelState})
+    navigate(`home/${scense}/${level}`)
   }
 
 
@@ -111,21 +109,21 @@ export default function Choose() {
                     <Chip
                       style={{ width: '3.5rem' }}
                       label="初级"
-                      color={levelState === 'easy' ? "primary" : "default"}
+                      color={level === 'easy' ? "primary" : "default"}
                       variant="outlined"
                       onClick={() => handleChipClick('easy')}
                     />
                     <Chip
                       style={{ width: '3.5rem'}}
                       label="中级"
-                      color={levelState === 'medium' ? "primary" : "default"}
+                      color={level === 'medium' ? "primary" : "default"}
                       variant="outlined"
                       onClick={() => handleChipClick('medium')}
                     />
                     <Chip
                       style={{ width: '3.5rem'}}
                       label="高级"
-                      color={levelState === 'hard' ? "primary" : "default"}
+                      color={level === 'hard' ? "primary" : "default"}
                       variant="outlined"
                       onClick={() => handleChipClick('hard')}
                     />

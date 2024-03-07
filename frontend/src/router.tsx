@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
     element: <Choose />
   },
   {
-    path: '/home/:param/:param',
+    path: '/home/:scene/:level',
     element: <Home />
   },
   {
