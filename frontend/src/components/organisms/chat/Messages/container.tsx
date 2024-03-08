@@ -1,7 +1,7 @@
-import { memo, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { toast } from 'sonner';
+import { memo, useCallback, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { toast } from "sonner";
 
 import {
   IAction,
@@ -12,15 +12,15 @@ import {
   IMessageElement,
   IStep,
   ITool,
-  useChatInteract
-} from '@chainlit/react-client';
-import { MessageContainer as CMessageContainer } from '@chainlit/react-components';
+  useChatInteract,
+} from "@chainlit/react-client";
+import { MessageContainer as CMessageContainer } from "@chainlit/react-components";
 
-import { apiClientState } from 'state/apiClient';
-import { playgroundState } from 'state/playground';
-import { highlightMessage, sideViewState } from 'state/project';
-import { projectSettingsState } from 'state/project';
-import { settingsState } from 'state/settings';
+import { apiClientState } from "state/apiClient";
+import { playgroundState } from "state/playground";
+import { highlightMessage, sideViewState } from "state/project";
+import { projectSettingsState } from "state/project";
+import { settingsState } from "state/settings";
 
 interface Props {
   loading: boolean;
@@ -50,7 +50,7 @@ const MessageContainer = memo(
     messages,
     onFeedbackUpdated,
     callAction,
-    setAutoScroll
+    setAutoScroll,
   }: Props) => {
     const appSettings = useRecoilValue(settingsState);
     const projectSettings = useRecoilValue(projectSettingsState);
@@ -83,8 +83,8 @@ const MessageContainer = memo(
             functions = [
               ...functions,
               ...tools
-                .filter((t) => t.type === 'function')
-                .map((t) => t.function)
+                .filter((t) => t.type === "function")
+                .map((t) => t.function),
             ];
           }
           return {
@@ -92,15 +92,15 @@ const MessageContainer = memo(
             generation: generation
               ? {
                   ...generation,
-                  functions
+                  functions,
                 }
               : undefined,
             originalGeneration: generation
               ? {
                   ...generation,
-                  functions
+                  functions,
                 }
-              : undefined
+              : undefined,
           };
         });
       },
@@ -111,7 +111,7 @@ const MessageContainer = memo(
       (element: IMessageElement) => {
         let path = `/element/${element.id}`;
 
-        if (element.display === 'side') {
+        if (element.display === "side") {
           setSideView(element);
           return;
         }
@@ -120,7 +120,7 @@ const MessageContainer = memo(
           path += `?thread=${element.threadId}`;
         }
 
-        return navigate(element.display === 'page' ? path : '#');
+        return navigate(element.display === "page" ? path : "#");
       },
       [setSideView, navigate]
     );
@@ -137,7 +137,7 @@ const MessageContainer = memo(
                 toast.error(err.message);
               }
             }
-          }
+          },
         })),
       [actions]
     );
@@ -159,11 +159,11 @@ const MessageContainer = memo(
         highlightedMessage,
         loading,
         showFeedbackButtons: enableFeedback,
-        uiName: projectSettings?.ui?.name || '',
+        uiName: projectSettings?.ui?.name || "",
         onElementRefClick,
         onError,
         onFeedbackUpdated,
-        onPlaygroundButtonClick
+        onPlaygroundButtonClick,
       };
     }, [
       appSettings.defaultCollapseContent,
@@ -179,7 +179,7 @@ const MessageContainer = memo(
       onElementRefClick,
       onError,
       onFeedbackUpdated,
-      onPlaygroundButtonClick
+      onPlaygroundButtonClick,
     ]);
 
     return (

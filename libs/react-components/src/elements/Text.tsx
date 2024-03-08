@@ -13,17 +13,18 @@ interface Props {
 const TextElement = ({ element }: Props) => {
   const { data, error, isLoading } = useFetch(element.url || null);
 
-  let content = '';
+  let content;
 
   if (isLoading) {
     content = 'Loading...';
   } else if (error) {
     content = 'An error occured';
   } else if (data) {
-    content = data;
+    console.log('data' + data);
+    content = data.content;
   }
 
-  if (!isLoading && !error && element.language) {
+  if (element.language && content && !isLoading && !error) {
     content = `\`\`\`${element.language}\n${content}\n\`\`\``;
   }
 
