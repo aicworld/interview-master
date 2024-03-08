@@ -282,18 +282,11 @@ class Message(MessageBase):
     async def send_with_score(self,score):
         """Send the message along with the score."""
         trace_event("send_message")
+        self.score = score
         await super().send()
         context.session.root_message = self
         # Use your existing message sending logic here
         # For example, to send as a combined payload:
-
-        payload = {
-            "content": self.content,
-            "score": score,
-            "round": self.round,
-        }
-        
-        await context.emitter.send_step(payload)
 
          # Create tasks for all actions and elements
         tasks = [action.send(for_id=self.id) for action in self.actions]

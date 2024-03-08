@@ -119,7 +119,6 @@ async def on_message(message: cl.Message):
 
         score,result = extract_last_bracket_number_and_preceding_text(msg.content)
         
-
         await msg.send_with_score(score)
         
         
