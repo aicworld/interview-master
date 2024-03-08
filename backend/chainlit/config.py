@@ -192,6 +192,8 @@ class FeaturesSettings(DataClassJsonMixin):
 @dataclass()
 class UISettings(DataClassJsonMixin):
     name: str
+    level: str = "easy"
+    scene: str = "1"
     show_readme_as_default: bool = True
     description: str = ""
     hide_cot: bool = False

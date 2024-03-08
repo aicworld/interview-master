@@ -2,36 +2,33 @@ import Page from 'pages/Page';
 
 import { useParams } from 'react-router-dom';
 import Chat from 'components/organisms/chat/index';
-import {
-  useChatInteract,
-  IStep
-} from '@chainlit/react-client';
+import { useChatInteract, IStep } from '@chainlit/react-client';
 import { IAttachment } from 'state/chat';
 import { v4 as uuidv4 } from 'uuid';
+import { useEffect } from 'react';
 
 export default function Home() {
   const { scene, level } = useParams<{ scene: string; level: string }>();
-  
-  //初始化模拟面试场景
-  if (scene !== undefined && level !== undefined) {
-    const { sendMessage } = useChatInteract();
-    const placeholder: IAttachment[] = [];
-    const initMessage: IStep = {
-      id: uuidv4(),
-      name: '系统',
-      type: 'init_message',
-      scene: scene,
-      level: level,
-      output: '',
-      createdAt: new Date().toISOString()
-    };
-    sendMessage(initMessage, placeholder);
-  }
-
+  const { sendMessage } = useChatInteract();
+  useEffect(() => {
+    if (scene !== undefined && level !== undefined) {
+      const placeholder: IAttachment[] = [];
+      const initMessage: IStep = {
+        id: uuidv4(),
+        name: '系统',
+        type: 'init_message',
+        scene: scene,
+        level: level,
+        output: '',
+        createdAt: new Date().toISOString(),
+      };
+      sendMessage(initMessage, placeholder);
+    }
+  }, [scene, level]);
 
   return (
     <Page>
-      <Chat />  
+      <Chat />
     </Page>
   );
 }

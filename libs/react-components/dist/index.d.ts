@@ -196,7 +196,7 @@ interface IChatGeneration extends IBaseGeneration {
 }
 type IGeneration = ICompletionGeneration | IChatGeneration;
 
-type StepType = 'assistant_message' | 'user_message' | 'system_message' | 'run' | 'tool' | 'llm' | 'embedding' | 'retrieval' | 'rerank' | 'undefined';
+type StepType = 'init_message' | 'assistant_message' | 'user_message' | 'system_message' | 'run' | 'tool' | 'llm' | 'embedding' | 'retrieval' | 'rerank' | 'undefined';
 interface IStep {
     id: string;
     name: string;
@@ -206,6 +206,8 @@ interface IStep {
     isError?: boolean;
     showInput?: boolean | string;
     waitForAnswer?: boolean;
+    scene?:string,
+    level?:string,
     input?: string;
     output: string;
     createdAt: number | string;

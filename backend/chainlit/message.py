@@ -214,6 +214,8 @@ class Message(MessageBase):
         id: Optional[str] = None,
         created_at: Union[str, None] = None,
         round: Optional[int] = None,
+        difficulty: Optional[str] = config.ui.level,
+        scene: Optional[str] = config.ui.scene,
     ):
         time.sleep(0.001)
         self.language = language
@@ -239,10 +241,12 @@ class Message(MessageBase):
         self.score = score
         self.author = author
         self.type = type
+        self.difficulty = difficulty
+        self.scene = scene
         self.actions = actions if actions is not None else []
         self.elements = elements if elements is not None else []
         self.disable_feedback = disable_feedback
-        self.score = 0
+        self.round = round
         super().__post_init__()
 
     async def send(self) -> str:
@@ -275,7 +279,7 @@ class Message(MessageBase):
     async def get_round(self) -> Optional[int]:
         return self.round
 
-    async def send_with_score(self):
+    async def send_with_score(self,score):
         """Send the message along with the score."""
         trace_event("send_message")
         await super().send()
@@ -284,10 +288,11 @@ class Message(MessageBase):
         # For example, to send as a combined payload:
 
         payload = {
-            "message": self.content,
-            "score": self.score,
+            "content": self.content,
+            "score": score,
             "round": self.round,
         }
+        
         await context.emitter.send_step(payload)
 
          # Create tasks for all actions and elements
@@ -321,7 +326,6 @@ class Message(MessageBase):
     async def remove_actions(self):
         for action in self.actions:
             await action.remove()
-
 
 class ErrorMessage(MessageBase):
     """

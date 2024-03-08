@@ -32,14 +32,13 @@ const MessageContent = memo(
     const {
       preparedContent: output,
       inlinedElements: outputInlinedElements,
-      refElements: outputRefElements
+      refElements: outputRefElements,
     } = prepareContent({
       elements,
       id: message.id,
       content: message.output,
-      language: message.language
+      language: message.language,
     });
-
     lineCount += output.split('\n').length;
     contentLength += output.length;
 
@@ -64,9 +63,8 @@ const MessageContent = memo(
           language:
             typeof message.showInput === 'string'
               ? message.showInput
-              : undefined
+              : undefined,
         });
-
       lineCount += input.split('\n').length;
       contentLength += input.length;
 
@@ -89,7 +87,7 @@ const MessageContent = memo(
           fontSize: '1rem',
           lineHeight: '1.5rem',
           fontFamily: (theme) => theme.typography.fontFamily,
-          fontWeight: isUser ? 500 : 300
+          fontWeight: isUser ? 500 : 300,
         }}
         component="div"
       >
