@@ -1,3 +1,4 @@
+import * as react_jsx_runtime from 'react/jsx-runtime';
 import { RuleNames } from 'react-password-checklist';
 import * as react from 'react';
 import { ReactElement, Component, ErrorInfo, ReactNode } from 'react';
@@ -28,7 +29,7 @@ type AuthLoginProps = {
         maxLength?: number;
     };
 };
-declare const AuthLogin: ({ title, error, providers, callbackUrl, onPasswordSignIn, onOAuthSignIn, onForgotPassword, onSignUp, renderLogo, passwordChecklistSettings }: AuthLoginProps) => JSX.Element;
+declare const AuthLogin: ({ title, error, providers, callbackUrl, onPasswordSignIn, onOAuthSignIn, onForgotPassword, onSignUp, renderLogo, passwordChecklistSettings }: AuthLoginProps) => react_jsx_runtime.JSX.Element;
 
 interface AuthForgotPasswordProps {
     onGoBack: () => void;
@@ -52,17 +53,17 @@ interface AuthVerifyEmailProps {
 }
 declare const AuthVerifyEmail: ({ email, onGoBack, onResend }: AuthVerifyEmailProps) => JSX.Element;
 
-declare const GreyButton: ({ sx, ...props }: ButtonProps) => JSX.Element;
+declare const GreyButton: ({ sx, ...props }: ButtonProps) => react_jsx_runtime.JSX.Element;
 
 interface Props$i extends ButtonProps {
     component?: any;
     to?: any;
 }
-declare const RegularButton: ({ children, ...props }: Props$i) => JSX.Element;
+declare const RegularButton: ({ children, ...props }: Props$i) => react_jsx_runtime.JSX.Element;
 
 declare function AccentButton({ children, ...props }: ButtonProps & {
     target?: string;
-}): JSX.Element;
+}): react_jsx_runtime.JSX.Element;
 
 type NotificationCountProps = {
     count?: number | string;
@@ -243,14 +244,14 @@ interface IAsk {
 
 declare const AudioElement: ({ element }: {
     element: IAudioElement;
-}) => JSX.Element | null;
+}) => react_jsx_runtime.JSX.Element | null;
 
 interface Props$h {
     author: string;
     bgColor?: string;
     element?: IAvatarElement;
 }
-declare const AvatarElement: ({ element, author, bgColor }: Props$h) => JSX.Element;
+declare const AvatarElement: ({ element, author, bgColor }: Props$h) => react_jsx_runtime.JSX.Element;
 
 interface ElementProps {
     element?: IMessageElement;
@@ -263,90 +264,90 @@ interface SideViewProps {
     isOpen: boolean;
     onClose: () => void;
 }
-declare const ElementSideView: ({ children, element, isOpen, onClose }: SideViewProps) => JSX.Element;
+declare const ElementSideView: ({ children, element, isOpen, onClose }: SideViewProps) => react_jsx_runtime.JSX.Element;
 
 interface ElementViewProps {
     element: IMessageElement;
     onGoBack?: () => void;
 }
-declare const ElementView: ({ element, onGoBack }: ElementViewProps) => JSX.Element;
+declare const ElementView: ({ element, onGoBack }: ElementViewProps) => react_jsx_runtime.JSX.Element;
 
 declare const FileElement: ({ element }: {
     element: IFileElement;
-}) => JSX.Element | null;
+}) => react_jsx_runtime.JSX.Element | null;
 
 declare const FrameElement: ({ children }: {
     children: React.ReactNode;
-}) => JSX.Element;
+}) => react_jsx_runtime.JSX.Element;
 
 interface Props$g {
     element: IImageElement;
 }
-declare const ImageElement: ({ element }: Props$g) => JSX.Element | null;
+declare const ImageElement: ({ element }: Props$g) => react_jsx_runtime.JSX.Element | null;
 
 interface Props$f {
     element: IPdfElement;
 }
-declare const PDFElement: ({ element }: Props$f) => JSX.Element | null;
+declare const PDFElement: ({ element }: Props$f) => react_jsx_runtime.JSX.Element | null;
 
 interface Props$e {
     element: IPlotlyElement;
 }
-declare const PlotlyElement: (props: Props$e) => JSX.Element;
+declare const PlotlyElement: (props: Props$e) => react_jsx_runtime.JSX.Element;
 
 interface Props$d {
     element: ITextElement;
 }
-declare const TextElement: ({ element }: Props$d) => JSX.Element;
+declare const TextElement: ({ element }: Props$d) => react_jsx_runtime.JSX.Element;
 
 declare const VideoElement: ({ element }: {
     element: IVideoElement;
-}) => JSX.Element | null;
+}) => react_jsx_runtime.JSX.Element | null;
 
 interface Props$c {
     items: IAudioElement[];
 }
-declare const InlinedAudioList: ({ items }: Props$c) => JSX.Element;
+declare const InlinedAudioList: ({ items }: Props$c) => react_jsx_runtime.JSX.Element;
 
 interface Props$b {
     elements: IMessageElement[];
 }
-declare const InlinedElements: ({ elements }: Props$b) => JSX.Element | null;
+declare const InlinedElements: ({ elements }: Props$b) => react_jsx_runtime.JSX.Element | null;
 
 interface Props$a {
     items: IFileElement[];
 }
-declare const InlinedFileList: ({ items }: Props$a) => JSX.Element;
+declare const InlinedFileList: ({ items }: Props$a) => react_jsx_runtime.JSX.Element;
 
 interface Props$9 {
     items: IImageElement[];
 }
-declare const InlinedImageList: ({ items }: Props$9) => JSX.Element;
+declare const InlinedImageList: ({ items }: Props$9) => react_jsx_runtime.JSX.Element;
 
 interface Props$8 {
     items: IPdfElement[];
 }
-declare const InlinedPDFList: ({ items }: Props$8) => JSX.Element;
+declare const InlinedPDFList: ({ items }: Props$8) => react_jsx_runtime.JSX.Element;
 
 interface Props$7 {
     items: IPlotlyElement[];
 }
-declare const InlinedPlotlyList: ({ items }: Props$7) => JSX.Element;
+declare const InlinedPlotlyList: ({ items }: Props$7) => react_jsx_runtime.JSX.Element;
 
 interface Props$6 {
     items: ITextElement[];
 }
-declare const InlinedTextList: ({ items }: Props$6) => JSX.Element;
+declare const InlinedTextList: ({ items }: Props$6) => react_jsx_runtime.JSX.Element;
 
 interface Props$5 {
     items: IVideoElement[];
 }
-declare const InlinedVideoList: ({ items }: Props$5) => JSX.Element;
+declare const InlinedVideoList: ({ items }: Props$5) => react_jsx_runtime.JSX.Element;
 
 type SliderInputProps = IInput & SliderProps & {
     setField?(field: string, value: number, shouldValidate?: boolean): void;
 };
-declare const SliderInput: ({ description, hasError, id, label, tooltip, setField, ...sliderProps }: SliderInputProps) => JSX.Element;
+declare const SliderInput: ({ description, hasError, id, label, tooltip, setField, ...sliderProps }: SliderInputProps) => react_jsx_runtime.JSX.Element;
 
 type SwitchInputProps = IInput & {
     checked: boolean;
@@ -452,7 +453,7 @@ interface Props$4 {
     messages: IStep[];
     setAutoScroll?: (autoScroll: boolean) => void;
 }
-declare const MessageContainer: react.MemoExoticComponent<({ actions, autoScroll, context, elements, messages, setAutoScroll }: Props$4) => JSX.Element>;
+declare const MessageContainer: react.MemoExoticComponent<({ actions, autoScroll, context, elements, messages, setAutoScroll }: Props$4) => react_jsx_runtime.JSX.Element>;
 
 interface ILLMProvider {
     id: string;
@@ -496,7 +497,7 @@ interface IPlaygroundContext {
 interface Props$3 {
     context: IPlaygroundContext;
 }
-declare const PromptPlayground: ({ context }: Props$3) => JSX.Element;
+declare const PromptPlayground: ({ context }: Props$3) => react_jsx_runtime.JSX.Element;
 
 declare const white = "#FFFFFF";
 declare const grey: {
@@ -574,7 +575,7 @@ interface Props$2 {
     mime: string;
     children?: React.ReactNode;
 }
-declare const Attachment: ({ name, mime, children }: Props$2) => JSX.Element;
+declare const Attachment: ({ name, mime, children }: Props$2) => react_jsx_runtime.JSX.Element;
 
 interface ClipboardCopyProps {
     value: string;
@@ -583,7 +584,7 @@ interface ClipboardCopyProps {
 }
 declare const ClipboardCopy: ({ value, edge }: ClipboardCopyProps) => JSX.Element;
 
-declare const Code: ({ children, ...props }: any) => JSX.Element;
+declare const Code: ({ children, ...props }: any) => react_jsx_runtime.JSX.Element;
 
 interface Props$1 {
     allowHtml?: boolean;
@@ -591,7 +592,7 @@ interface Props$1 {
     refElements?: IMessageElement[];
     children: string;
 }
-declare function Markdown({ refElements, allowHtml, latex, children }: Props$1): JSX.Element;
+declare function Markdown({ refElements, allowHtml, latex, children }: Props$1): react_jsx_runtime.JSX.Element;
 
 interface CollapseProps {
     children: React.ReactNode;
@@ -611,9 +612,9 @@ declare class ErrorBoundary extends Component<Props, State> {
     state: State;
     static getDerivedStateFromError(err: Error): State;
     componentDidCatch(error: Error, errorInfo: ErrorInfo): void;
-    render(): string | number | boolean | JSX.Element | react.ReactFragment | null | undefined;
+    render(): string | number | boolean | react_jsx_runtime.JSX.Element | Iterable<ReactNode> | null | undefined;
 }
 
 declare const NotificationCount: ({ count, inputProps }: NotificationCountProps) => JSX.Element | null;
 
-export { AccentButton, Attachment, AudioElement, AuthForgotPassword, AuthLogin, AuthResetPassword, AuthVerifyEmail, AvatarElement, ClipboardCopy, Code, Collapse, Element, ElementSideView, ElementView, ErrorBoundary, FileElement, FormInput, FrameElement, GreyButton, IFormInput, IInput, ILLMProvider, ILLMProviderSettings, IMessageContext, IPlayground, IPlaygroundContext, ImageElement, InlinedAudioList, InlinedElements, InlinedFileList, InlinedImageList, InlinedPDFList, InlinedPlotlyList, InlinedTextList, InlinedVideoList, InputLabel, InputStateHandler, Markdown, MessageContainer, NotificationCount, NotificationCountProps, PDFElement, PlotlyElement, PromptMode, PromptPlayground, RegularButton, SelectCategoryInput, SelectInput, SelectInputProps, SelectItem, SliderInput, SliderInputProps, SwitchInput, SwitchInputProps, TFormInput, TFormInputValue, TagsInput, TagsInputProps, TextElement, TextInput, TextInputProps, Toggle, VideoElement, darkGreyButtonTheme, green, grey, lightGreyButtonTheme, makeTheme, primary, useColors, useIsDarkMode, useUpload, white, yellow };
+export { AccentButton, Attachment, AudioElement, AuthForgotPassword, AuthLogin, AuthResetPassword, AuthVerifyEmail, AvatarElement, ClipboardCopy, Code, Collapse, Element, ElementSideView, ElementView, ErrorBoundary, FileElement, FormInput, FrameElement, GreyButton, type IFormInput, type IInput, type ILLMProvider, type ILLMProviderSettings, type IMessageContext, type IPlayground, type IPlaygroundContext, ImageElement, InlinedAudioList, InlinedElements, InlinedFileList, InlinedImageList, InlinedPDFList, InlinedPlotlyList, InlinedTextList, InlinedVideoList, InputLabel, InputStateHandler, Markdown, MessageContainer, NotificationCount, type NotificationCountProps, PDFElement, PlotlyElement, type PromptMode, PromptPlayground, RegularButton, SelectCategoryInput, SelectInput, type SelectInputProps, type SelectItem, SliderInput, type SliderInputProps, SwitchInput, type SwitchInputProps, type TFormInput, type TFormInputValue, TagsInput, type TagsInputProps, TextElement, TextInput, type TextInputProps, Toggle, VideoElement, darkGreyButtonTheme, green, grey, lightGreyButtonTheme, makeTheme, primary, useColors, useIsDarkMode, useUpload, white, yellow };

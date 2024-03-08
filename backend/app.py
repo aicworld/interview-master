@@ -16,7 +16,7 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 client = AsyncOpenAI(
-    api_key="",
+    api_key="sk-kzh5j9p79xC9404fnLTrBfsbUuEGoTVYCEnHwy73QktGqDDn",
     base_url="https://api.moonshot.cn/v1",
 )
 

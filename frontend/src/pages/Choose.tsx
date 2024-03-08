@@ -27,7 +27,7 @@ export default function Choose() {
   };
 
   // 行业选择
-  const dropdownOptions = ['技术', '产品', '设计', '销售'];
+  const dropdownOptions = ['技术', '产品', '设计', '销售','工程'];
 
   // 难度选择
   const [level, setLevel] = useState('easy');
@@ -51,7 +51,7 @@ export default function Choose() {
           {/* 首页图片 */}
           <div style={{ marginTop: '20px', textAlign: 'center' }}>
             <img
-              src="/public/to_peak.jpg"
+              src="./public/to_peak.jpg"
               style={{ width: '70%', height: 'auto' }}
             />
           </div>
@@ -180,6 +180,33 @@ export default function Choose() {
                 onClick={() => handleChooseInterview(5)}
               >
                 前端模拟面试
+              </Button>
+            )}
+            {industrySelectValue.filter((item) => item.includes('工程'))
+              .length > 0 && (
+              <Button
+                variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                onClick={() => handleChooseInterview(5)}
+              >
+                道路工程师模拟面试
+              </Button>
+            )}
+            {industrySelectValue.filter((item) => item.includes('工程'))
+              .length > 0 && (
+              <Button
+                variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                onClick={() => handleChooseInterview(5)}
+              >
+                桥梁工程师模拟面试
+              </Button>
+            )}
+            {industrySelectValue.filter((item) => item.includes('工程'))
+              .length > 0 && (
+              <Button
+                variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
+                onClick={() => handleChooseInterview(5)}
+              >
+                排水工程师模拟面试
               </Button>
             )}
           </Stack>

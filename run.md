@@ -1,6 +1,5 @@
 # backend 服务器启动步骤
-* 初始化 ：python3 -m chainlit run app.py -w
-* 运行命令：chainlit run app.py
+* 初始化 ：python -m chainlit run app.py -w
 
 # frontend 前端启动步骤
 * 初始化 ：pnpm i
