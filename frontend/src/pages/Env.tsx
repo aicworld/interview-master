@@ -43,7 +43,7 @@ export default function Env() {
       setUserEnv(values);
       toast.success(t('pages.Env.savedSuccessfully'));
       return navigate('/');
-    }
+    },
   });
 
   if (requiredKeys.length === 0) {
@@ -74,7 +74,7 @@ export default function Env() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        flexGrow: 1
+        flexGrow: 1,
       }}
     >
       <Header />
@@ -87,7 +87,7 @@ export default function Env() {
         sx={{
           maxWidth: '60rem',
           width: '100%',
-          mx: 'auto'
+          mx: 'auto',
         }}
       >
         <Typography

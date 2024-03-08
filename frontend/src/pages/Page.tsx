@@ -35,7 +35,7 @@ const Page = ({ children }: Props) => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        width: '100%'
+        width: '100%',
       }}
     >
       <Header projectSettings={projectSettings} />
