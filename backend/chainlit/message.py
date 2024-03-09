@@ -279,10 +279,10 @@ class Message(MessageBase):
     async def get_round(self) -> Optional[int]:
         return self.round
 
-    async def send_with_score(self,score):
+    async def send_with_score(self):
         """Send the message along with the score."""
         trace_event("send_message")
-        self.score = score
+
         await super().send()
         context.session.root_message = self
         # Use your existing message sending logic here
