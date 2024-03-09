@@ -146,6 +146,9 @@ class Step:
     elements: Optional[List[Element]]
     fail_on_persist_error: bool
 
+    score: Optional[int]
+    round: Optional[int]
+
     def __init__(
         self,
         name: Optional[str] = config.ui.name,
@@ -157,6 +160,8 @@ class Step:
         root: bool = False,
         language: Optional[str] = None,
         show_input: Union[bool, str] = False,
+        score  = 0,
+        round = 0
     ):
         trace_event(f"init {self.__class__.__name__} {type}")
         time.sleep(0.001)
@@ -184,6 +189,9 @@ class Step:
         self.streaming = False
         self.persisted = False
         self.fail_on_persist_error = False
+
+        self.round = round
+        self.score = score
 
     def _process_content(self, content, set_language=False):
         if content is None:
@@ -240,6 +248,8 @@ class Step:
             "language": self.language,
             "showInput": self.show_input,
             "generation": self.generation.to_dict() if self.generation else None,
+            "score":self.score,
+            "round":self.round,
         }
         return _dict
 
