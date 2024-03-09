@@ -43,6 +43,7 @@ class MessageBase(ABC):
     indent: Optional[int] = None
     generation: Optional[BaseGeneration] = None
     score: Optional[int] = None 
+    round: Optional[int] = None
     
     def __post_init__(self) -> None:
         trace_event(f"init {self.__class__.__name__}")
@@ -84,6 +85,9 @@ class MessageBase(ABC):
             "waitForAnswer": self.wait_for_answer,
             "indent": self.indent,
             "generation": self.generation.to_dict() if self.generation else None,
+            "round":self.round,
+            "score":self.score
+            
         }
 
         return _dict
@@ -279,10 +283,10 @@ class Message(MessageBase):
     async def get_round(self) -> Optional[int]:
         return self.round
 
-    async def send_with_score(self,score):
+    async def send_with_score(self):
         """Send the message along with the score."""
         trace_event("send_message")
-        self.score = score
+
         await super().send()
         context.session.root_message = self
         # Use your existing message sending logic here
