@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 
 export default function Home() {
-  const { scene, level } = useParams<{ scene: string; level: string }>();
+  const { scene, level, positionName } = useParams<{ scene: string; level: string, positionName: string; }>();
   const { sendMessage } = useChatInteract();
   useEffect(() => {
     if (scene !== undefined && level !== undefined) {
@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <Page>
-      <Chat />
+      <Chat name={positionName!}/>
     </Page>
   );
 }

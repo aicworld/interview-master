@@ -4,14 +4,13 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Alert, Box } from '@mui/material';
+import { Alert, Box, LinearProgress,Typography } from '@mui/material';
 
 import {
   threadHistoryState,
   useChatData,
   useChatInteract,
-  useChatSession,
-  IStep
+  useChatSession
 } from '@chainlit/react-client';
 import { ErrorBoundary, useUpload} from '@chainlit/react-components';
 
@@ -28,11 +27,12 @@ import Messages from './Messages';
 import DropScreen from './dropScreen';
 import InputBox from './inputBox';
 
-
-const Chat: React.FC = () => {
+interface sceneProps {
+  name: string
+} 
+const Chat: React.FC<sceneProps> = ({name}) => {
 
   const { idToResume } = useChatSession();
-
   const projectSettings = useRecoilValue(projectSettingsState);
   const setAttachments = useSetRecoilState(attachmentsState);
   const setThreads = useSetRecoilState(threadHistoryState);
@@ -43,7 +43,6 @@ const Chat: React.FC = () => {
   const { error, disabled } = useChatData();
   const { uploadFile } = useChatInteract();
   const uploadFileRef = useRef(uploadFile);
-
   const fileSpec = useMemo(() => ({ max_size_mb: 500 }), []);
 
   const { t } = useTranslation();
@@ -173,9 +172,101 @@ const Chat: React.FC = () => {
           <input id="#upload-drop-input" {...upload.getInputProps()} />
           {upload?.isDragActive ? <DropScreen /> : null}
         </>
-      ) : null}
+      ) : null}      
       <SideView>
-        <Box my={1} />
+        {/* 补充面试职位名称 */}
+        <Box 
+            sx={{
+              // display: 'flex', // 使用 Flexbox 布局
+              width: '95%',
+              maxWidth: '60rem',
+              mx: 'auto',
+              my: 1,
+              height: '9rem', // 添加高度
+              border: '1.5px solid red', // 添加边框
+              borderRadius: '10px', // 切割圆角
+              boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.5)' // 添加阴影
+            }} 
+        >
+            <Box
+              sx={{
+                flex: 1, // 左侧区域的比例为 1，会占据可用空间的全部宽度
+                // backgroundColor: 'lightblue',
+                padding: '10px'
+              }}
+            >
+
+            {/* 职位名称 */}
+            <Box
+                sx={{
+                  flex: 1, // 左侧区域的比例为 1，会占据可用空间的全部宽度
+                  // backgroundColor: 'lightblue',
+                  // padding: '5px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center', // 垂直方向上的居中对齐
+                  justifyContent: 'center' // 水平方向上的居中对齐
+                }}
+              >
+                 <span style={{ fontSize: '18px', fontWeight: 'bold' }}>{name}</span>
+              </Box>
+
+
+              {/* 进度条 */}
+              <Box
+                sx={{
+                  flex: 1, // 右侧区域的比例为 1，会占据可用空间的全部宽度
+                  // backgroundColor: 'lightgreen',
+                  // padding: '10px'
+                }}
+              >
+                
+                {/* 得分值 */}
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%', // 设置 Flex 容器的宽度为进度条的宽度
+                    marginTop: '20px' // 设置底部间距
+                  }}
+                >
+                  <Typography variant="h6" sx={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280' }}>得分值</Typography> {/* 显示得分 */}
+                  <Typography variant="h6" sx={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280' }}>{80}/100</Typography> {/* 显示总分 */}
+                </Box>
+
+                {/* 分数条 */}
+                <LinearProgress
+                  variant="determinate"
+                  value={80} // 计算进度值
+                  sx={{ 
+                    marginTop: '10px',
+                    height: '10px', // 设置进度条的高度为10px
+                    borderRadius: '5px', // 设置进度条的圆角
+                    backgroundColor: 'lightgray', // 设置进度条的背景颜色
+                    '& .MuiLinearProgress-bar': { // 通过类名选择进度条的样式
+                      // backgroundColor: 'green', // 设置进度条的颜色为绿色
+                      borderRadius: '5px' // 设置进度条的圆角，与父容器相同
+                    }
+                  }} // 设置进度条与文本之间的间距
+                />
+
+                {/* 得分值 */}
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%', // 设置 Flex 容器的宽度为进度条的宽度
+                    marginTop: '10px' // 设置底部间距
+                  }}
+                >
+                  <Typography variant="h6" sx={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280' }}>面试轮次</Typography> {/* 显示得分 */}
+                  <Typography variant="h6" sx={{ fontSize: '14px', fontWeight: 'bold', color: '#6b7280' }}>{10}/20</Typography> {/* 显示总分 */}
+                </Box>
+              </Box>
+
+            </Box>
+           
+        </Box> 
         {error ? (
           <Box
             sx={{

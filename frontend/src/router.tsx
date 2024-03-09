@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
     element: <Choose />
   },
   {
-    path: '/home/:scene/:level',
+    path: '/home/:scene/:level/:positionName',
     element: <Home />
   },
   {

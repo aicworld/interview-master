@@ -719,14 +719,17 @@ async def get_logo(theme: Optional[Theme] = Query(Theme.light)):
     theme_value = theme.value if theme else Theme.light.value
     logo_path = None
 
-    for path in [
+    for path in [ 
         os.path.join(APP_ROOT, "public", f"logo_{theme_value}.*"),
         os.path.join(build_dir, "assets", f"logo_{theme_value}*.*"),
     ]:
         files = glob.glob(path)
 
         if files:
+            print("APP_ROOT:", APP_ROOT)  
+            print("build_dir:", build_dir) 
             logo_path = files[0]
+            print("Logo Path:", logo_path)  # 在这里添加打印语句
             break
 
     if not logo_path:
