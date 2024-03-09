@@ -77,7 +77,7 @@ multi_modal = true
 
 [UI]
 # Name of the app and chatbot.
-name = "Chatbot"
+name = "面试官"
 
 # Show the readme while the thread is empty.
 show_readme_as_default = true
