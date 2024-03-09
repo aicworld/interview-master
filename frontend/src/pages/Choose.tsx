@@ -51,7 +51,7 @@ export default function Choose() {
           {/* 首页图片 */}
           <div style={{ marginTop: '20px', textAlign: 'center' }}>
             <img
-              src="./public/to_peak.jpg"
+              src="/to_peak.jpg"
               style={{ width: '70%', height: 'auto' }}
             />
           </div>
