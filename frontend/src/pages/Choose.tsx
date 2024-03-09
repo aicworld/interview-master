@@ -36,11 +36,11 @@ export default function Choose() {
   };
 
   const [interviewChooseSelected, setInterviewChooseSelected] = useState(false);
-  function handleChooseInterview(scence: number) {
+  function handleChooseInterview(scence: number, positionName: string) {
     // ts语法表示类似event
     setInterviewChooseSelected(!interviewChooseSelected);
     // 传递当前选择的面试场景给后端，并跳转至模拟面试界面
-    navigate(`home/${scence}/${level}`);
+    navigate(`home/${scence}/${level}/${positionName}`);
   }
 
   return (
@@ -51,7 +51,7 @@ export default function Choose() {
           {/* 首页图片 */}
           <div style={{ marginTop: '20px', textAlign: 'center' }}>
             <img
-              src="./public/to_peak.jpg"
+              src="/to_peak.jpg"
               style={{ width: '70%', height: 'auto' }}
             />
           </div>
@@ -141,7 +141,8 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(1)}
+                // onClick={() => handleChooseInterview({ id: 1, title: 'Golang工程师模拟面试' })}
+                onClick={() => handleChooseInterview(1, 'Golang工程师模拟面试' )}
               >
                 Golang工程师模拟面试
               </Button>
@@ -150,7 +151,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(2)}
+                onClick={() => handleChooseInterview(2, '产品经理模拟面试')}
               >
                 产品经理模拟面试
               </Button>
@@ -159,7 +160,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(3)}
+                onClick={() => handleChooseInterview(3, '运维工程师模拟面试')}
               >
                 运维工程师模拟面试
               </Button>
@@ -168,7 +169,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(4)}
+                onClick={() => handleChooseInterview(4, 'UI模拟面试')}
               >
                 UI模拟面试
               </Button>
@@ -177,7 +178,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(5)}
+                onClick={() => handleChooseInterview(5, '前端模拟面试')}
               >
                 前端模拟面试
               </Button>
@@ -186,7 +187,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(5)}
+                onClick={() => handleChooseInterview(5, '道路工程师模拟面试')}
               >
                 道路工程师模拟面试
               </Button>
@@ -195,7 +196,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(5)}
+                onClick={() => handleChooseInterview(5, '桥梁工程师模拟面试')}
               >
                 桥梁工程师模拟面试
               </Button>
@@ -204,7 +205,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(5)}
+                onClick={() => handleChooseInterview(5, '排水工程师模拟面试')}
               >
                 排水工程师模拟面试
               </Button>
