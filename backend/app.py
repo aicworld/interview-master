@@ -16,7 +16,7 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 client = AsyncOpenAI(
-    api_key="sk-wo0dUHqciCSIALiSSCI3Q4ZQ40TQEogFA7r390pisJUCjA5X",
+    api_key="",
     base_url="https://api.moonshot.cn/v1",
 )
 
@@ -126,7 +126,7 @@ async def on_message(message: cl.Message):
         await msg.update()
 
         grade = await client.chat.completions.create(
-            model="moonshot-v1-128k",
+            model="moonshot-v1-8k",
             messages=[
                 {"role": "system", "content": cl.user_session.get("grade_prompt")},
                 {"role": "user", "content": user_input}
