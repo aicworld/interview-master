@@ -14,9 +14,10 @@ from chainlit.context import init_ws_context
 from chainlit.session import WebsocketSession
 from fastapi import Request
 from fastapi.responses import JSONResponse
+import os
 
 client = AsyncOpenAI(
-    api_key="sk-LPxTEW8NXOdua5S0pjszHLerb9n759cGhtBMkiDVSQdSXF5A",
+    api_key=os.getenv('KimichatKey'),
     base_url="https://api.moonshot.cn/v1",
 )
 
