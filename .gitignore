@@ -2,3 +2,4 @@ node_modules
 /backend/__pycache__/
 /backend/chainlit/__pycache__
 *.pyc
+/backend/*.env
