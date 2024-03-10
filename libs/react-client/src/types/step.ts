@@ -2,6 +2,8 @@ import { IFeedback } from './feedback';
 import { IGeneration } from './generation';
 
 type StepType =
+  | 'init_message'
+  | 'score_message'
   | 'assistant_message'
   | 'user_message'
   | 'system_message'
@@ -22,6 +24,10 @@ export interface IStep {
   isError?: boolean;
   showInput?: boolean | string;
   waitForAnswer?: boolean;
+  scene?:string,
+  level?:string,
+  score?:number;
+  round?:number;
   input?: string;
   output: string;
   createdAt: number | string;

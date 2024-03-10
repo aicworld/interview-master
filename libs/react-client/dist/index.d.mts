@@ -2,7 +2,7 @@ import * as recoil from 'recoil';
 import { Socket } from 'socket.io-client';
 export { Socket } from 'socket.io-client';
 import * as lodash from 'lodash';
-import * as swr__internal from 'swr/_internal';
+import * as swr_dist__internal from 'swr/dist/_internal';
 import { SWRConfiguration } from 'swr';
 
 interface IAction {
@@ -116,7 +116,7 @@ interface IChatGeneration extends IBaseGeneration {
 }
 type IGeneration = ICompletionGeneration | IChatGeneration;
 
-type StepType = 'assistant_message' | 'user_message' | 'system_message' | 'run' | 'tool' | 'llm' | 'embedding' | 'retrieval' | 'rerank' | 'undefined';
+type StepType = 'init_message' | 'score_message' | 'assistant_message' | 'user_message' | 'system_message' | 'run' | 'tool' | 'llm' | 'embedding' | 'retrieval' | 'rerank' | 'undefined';
 interface IStep {
     id: string;
     name: string;
@@ -126,6 +126,10 @@ interface IStep {
     isError?: boolean;
     showInput?: boolean | string;
     waitForAnswer?: boolean;
+    scene?: string;
+    level?: string;
+    score?: number;
+    round?: number;
     input?: string;
     output: string;
     createdAt: number | string;
@@ -243,7 +247,7 @@ declare const useAuth: (apiClient: ChainlitAPI) => {
 };
 
 declare const fetcher: (client: ChainlitAPI, endpoint: string, token?: string) => Promise<any>;
-declare function useApi<T>(client: ChainlitAPI, path?: string | null, options?: SWRConfiguration): swr__internal.SWRResponse<T, Error, Partial<swr__internal.PublicConfiguration<T, Error, swr__internal.BareFetcher<T>>> | undefined>;
+declare function useApi<T>(client: ChainlitAPI, path?: string | null, options?: SWRConfiguration): swr_dist__internal.SWRResponse<T, Error, SWRConfiguration<T, Error, ((arg: readonly [any, ...unknown[]]) => swr_dist__internal.FetcherResponse<T>) | ((arg: readonly [any, ...unknown[]]) => swr_dist__internal.FetcherResponse<T>)> | undefined>;
 
 interface IThreadFilters {
     search?: string;
@@ -375,4 +379,4 @@ declare const updateMessageById: (messages: IStep[], messageId: string, updatedM
 declare const deleteMessageById: (messages: IStep[], messageId: string) => IStep[];
 declare const updateMessageContentById: (messages: IStep[], messageId: number | string, updatedContent: string, isSequence: boolean) => IStep[];
 
-export { APIBase, ActionSpec, AuthProvider, ChainlitAPI, ClientError, ElementType, FileSpec, GenerationMessageRole, IAction, IAsk, IAudioElement, IAvatarElement, IBaseGeneration, ICallFn, IChatGeneration, ICompletionGeneration, IElement, IElementSize, IFeedback, IFileElement, IFileRef, IFunction, IGeneration, IGenerationMessage, IImageElement, ILLMSettings, IMessageElement, IPageInfo, IPagination, IPdfElement, IPlotlyElement, ISession, IStep, ITasklistElement, ITextElement, IThread, IThreadFilters, IToken, ITool, IUser, IUserMetadata, IVideoElement, ThreadHistory, UserInput, accessTokenState, actionState, addMessage, addMessageToParent, askUserState, avatarState, callFnState, chatProfileState, chatSettingsDefaultValueSelector, chatSettingsInputsState, chatSettingsValueState, deleteMessageById, elementState, fetcher, firstUserInteraction, hasMessageById, isLastMessage, loadingState, messagesState, nestMessages, sessionIdState, sessionState, tasklistState, threadHistoryState, threadIdToResumeState, tokenCountState, updateMessageById, updateMessageContentById, useApi, useAuth, useChatData, useChatInteract, useChatMessages, useChatSession, userState };
+export { APIBase, type ActionSpec, type AuthProvider, ChainlitAPI, ClientError, type ElementType, type FileSpec, type GenerationMessageRole, type IAction, type IAsk, type IAudioElement, type IAvatarElement, type IBaseGeneration, type ICallFn, type IChatGeneration, type ICompletionGeneration, type IElement, type IElementSize, type IFeedback, type IFileElement, type IFileRef, type IFunction, type IGeneration, type IGenerationMessage, type IImageElement, type ILLMSettings, type IMessageElement, type IPageInfo, type IPagination, type IPdfElement, type IPlotlyElement, type ISession, type IStep, type ITasklistElement, type ITextElement, type IThread, type IThreadFilters, type IToken, type ITool, type IUser, type IUserMetadata, type IVideoElement, type ThreadHistory, type UserInput, accessTokenState, actionState, addMessage, addMessageToParent, askUserState, avatarState, callFnState, chatProfileState, chatSettingsDefaultValueSelector, chatSettingsInputsState, chatSettingsValueState, deleteMessageById, elementState, fetcher, firstUserInteraction, hasMessageById, isLastMessage, loadingState, messagesState, nestMessages, sessionIdState, sessionState, tasklistState, threadHistoryState, threadIdToResumeState, tokenCountState, updateMessageById, updateMessageContentById, useApi, useAuth, useChatData, useChatInteract, useChatMessages, useChatSession, userState };
