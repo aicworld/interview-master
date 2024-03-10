@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+  import { useTranslation } from 'react-i18next';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { toast } from 'sonner';
 
@@ -32,7 +32,7 @@ const Messages = ({
   autoScroll,
   projectSettings,
   setAutoScroll
-}: MessagesProps): JSX.Element => {
+}: MessagesProps): JSX.Element => {  
   const { elements, askUser, avatars, loading, actions } = useChatData();
   const { messages } = useChatMessages();
   const { callAction } = useChatInteract();
