@@ -217,7 +217,7 @@ class Message(MessageBase):
         generation: Optional[BaseGeneration] = None,
         id: Optional[str] = None,
         created_at: Union[str, None] = None,
-        round: Optional[int] = None,
+        round: Optional[int] = 0,
         difficulty: Optional[str] = config.ui.level,
         scene: Optional[str] = config.ui.scene,
     ):
