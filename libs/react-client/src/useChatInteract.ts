@@ -56,6 +56,7 @@ const useChatInteract = () => {
     setTokenCount(0);
     resetChatSettings();
     resetChatSettingsValue();
+    console.log("clear")
   }, [session]);
 
   const sendMessage = useCallback(

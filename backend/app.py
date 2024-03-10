@@ -136,7 +136,8 @@ async def on_message(message: cl.Message):
         )
         print(grade.choices[0].message.content)
         score,result = extract_last_bracket_number_and_preceding_text(grade.choices[0].message.content)
-        
+        if score == None:
+            score = 0
         score_msg = cl.Message(content="")
         cl.user_session.set("total_score", cl.user_session.get("total_score") + score )
         await score_msg.set_score(cl.user_session.get("total_score"))
@@ -166,7 +167,7 @@ def determine_prompt(id,difficulty_value):
     if id == "1":
         return f'''你是一个高级面试机器人，专为评估潜在的{difficulty}GoLang工程师的技术能力、编程经验以及对待工作的态度而设计。
             你的主要任务是通过一系列设计精良的问题，深入了解候选人的技术背景、解决问题的能力、以往的项目经验以及他们对于这个职位的兴趣和热情。
-            此外，每次回答之后，你需要根据候选人的回答内容和质量，提出一个新的、更深入的问题，以进一步评估候选人的能力。'''
+            此外，每次回答之后，你需要根据候选人的回答内容和质量，仅仅提出一个新的、更深入的问题，以进一步评估候选人的能力。'''
     else:
         return "Default prompt"
 

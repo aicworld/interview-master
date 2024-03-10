@@ -208,7 +208,7 @@ class Message(MessageBase):
         self,
         content: Union[str, Dict],
         author: str = config.ui.name,
-        score: Optional[int] = None,
+        score: Optional[int] = 0,
         language: Optional[str] = None,
         actions: Optional[List[Action]] = None,
         elements: Optional[List[ElementBased]] = None,
@@ -355,8 +355,9 @@ class ErrorMessage(MessageBase):
         Send the error message to the UI and persist it in the cloud if a project ID is configured.
         Return the ID of the message.
         """
-        trace_event("send_error_message")
-        return await super().send()
+        # trace_event("send_error_message")
+        # return await super().send()
+        pass
 
 
 class AskMessageBase(MessageBase):
