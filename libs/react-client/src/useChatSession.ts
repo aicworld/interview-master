@@ -112,7 +112,8 @@ const useChatSession = () => {
       });
 
       socket.on('reload', () => {
-        socket.emit('clear_session');
+        console.log("reload")
+        // socket.emit('clear_session');
         window.location.reload();
       });
 
