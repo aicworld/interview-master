@@ -44,6 +44,8 @@ class MessageBase(ABC):
     generation: Optional[BaseGeneration] = None
     score: Optional[int] = None 
     round: Optional[int] = None
+    level: Optional[str] = None,
+    scene: Optional[str] = None,
     
     def __post_init__(self) -> None:
         trace_event(f"init {self.__class__.__name__}")
@@ -54,15 +56,16 @@ class MessageBase(ABC):
 
     @classmethod
     def from_dict(self, _dict: StepDict):
-        type = _dict.get("type", "assistant_message")
         message = Message(
             id=_dict["id"],
             created_at=_dict["createdAt"],
             content=_dict["output"],
             author=_dict.get("name", config.ui.name),
-            type=type,  # type: ignore
+            type=_dict["type"],  
             disable_feedback=_dict.get("disableFeedback", False),
             language=_dict.get("language"),
+            level=_dict.get("level"),
+            scene=_dict.get("scene"),
         )
 
         return message
@@ -218,8 +221,8 @@ class Message(MessageBase):
         id: Optional[str] = None,
         created_at: Union[str, None] = None,
         round: Optional[int] = 0,
-        difficulty: Optional[str] = config.ui.level,
-        scene: Optional[str] = config.ui.scene,
+        level: Optional[str] = None,
+        scene: Optional[str] = None,
     ):
         time.sleep(0.001)
         self.language = language
@@ -239,17 +242,18 @@ class Message(MessageBase):
 
         if id:
             self.id = str(id)
-
+        
         if created_at:
             self.created_at = created_at
         self.score = score
         self.author = author
         self.type = type
-        self.difficulty = difficulty
+        self.level = level
         self.scene = scene
         self.actions = actions if actions is not None else []
         self.elements = elements if elements is not None else []
         self.disable_feedback = disable_feedback
+        print(self.type)
         self.round = round
         super().__post_init__()
 
