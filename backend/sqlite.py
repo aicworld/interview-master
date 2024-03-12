@@ -23,9 +23,14 @@ CREATE TABLE IF NOT EXISTS scenarios (
 
 # Insert sample data into the scenarios table with additional fields
 sample_scenarios = [
-    (1, 'Scenario 1', 'Description for scenario 1', False, 20, 'tag1,tag2', 5, 0.5),
-    (2, 'Scenario 2', 'Description for scenario 2', True, 100, 'tag3,tag4', 10, 0.8),
-    (3, 'Scenario 3', 'Description for scenario 3', False, 40, 'tag5,tag6', 2, 0.3)
+    (1, 'Golang工程师模拟面试', 'Description for scenario 1', False, 0, '技术', 0, 0),
+    (2, '产品经理模拟面试', 'Description for scenario 2', False, 0, '产品', 0, 0),
+    (3, '运维工程师模拟面试', 'Description for scenario 3', False, 0, '技术', 0, 0),
+    (4, 'UI模拟面试', 'Description for scenario 1', False, 0, '设计', 0, 0),
+    (5, '前端模拟面试', 'Description for scenario 1', False, 0, '技术', 0, 0),
+    (6, '道路工程师模拟面试', 'Description for scenario 1', False, 0, '工程', 0, 0),
+    (7, '桥梁工程师模拟面试', 'Description for scenario 1', False, 0, '工程', 0, 0),
+    (8, '排水工程师模拟面试', 'Description for scenario 1', False, 0, '工程', 0, 0),
 ]
 
 # Since we're defining more columns, we specify them in the INSERT statement
