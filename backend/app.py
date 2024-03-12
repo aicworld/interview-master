@@ -15,13 +15,14 @@ from chainlit.session import WebsocketSession
 from fastapi import Request
 from fastapi.responses import JSONResponse
 import os
+import google.generativeai as genai
 
-client = AsyncOpenAI(
-    api_key=os.getenv('KimichatKey'),
-    base_url="https://api.moonshot.cn/v1",
-)
-
-
+# client = AsyncOpenAI(
+#     api_key=os.getenv('KimichatKey'),
+#     base_url="https://api.moonshot.cn/v1",
+# )
+genai.configure(api_key=os.getenv('GeminiKey'))
+model = genai.GenerativeModel('gemini-pro')
 def get_db_connection():
     conn = sqlite3.connect('app.db')
     conn.row_factory = sqlite3.Row
@@ -66,6 +67,7 @@ async def on_chat_start():
     cl.user_session.set("counter", 0)
     cl.user_session.set("score", 0)
     cl.user_session.set("total_score", 0)
+    cl.user_session.set("history_message","")
     await cl.Message(content="你好 请介绍下你自己").send()
 
 @cl.set_chat_profiles
@@ -98,7 +100,10 @@ async def on_message(message: cl.Message):
         
         cl.user_session.set("current_prompt", prompt)
         cl.user_session.set("grade_prompt", grade_prompt)
+        cl.user_session.set("history_message",cl.user_session.get("current_prompt"))
     else:
+        temp = cl.user_session.get("history_message")
+        cl.user_session.set("history_message",cl.user_session.get("history_message")+message.content)
         if(message.type == "user_message"):
             counter = cl.user_session.get("counter") + 1
             cl.user_session.set("counter", counter)
@@ -107,34 +112,44 @@ async def on_message(message: cl.Message):
         msg = cl.Message(content="")
         await msg.set_round(counter)
         await msg.send()
-        stream = await client.chat.completions.create(
-            model="moonshot-v1-8k",
-            messages=[
-                {"role": "system", "content": cl.user_session.get("current_prompt")},
-                {"role": "user", "content": user_input}
-            ],
-            temperature=0,
-            stream = True,
-        )
-        async for part in stream:
-            if token := part.choices[0].delta.content :  # Assuming `.text` or similar attribute holds the response part
-                await msg.stream_token(token)
-        
-        
+        # stream = await client.chat.completions.create(
+        #     model="moonshot-v1-8k",
+        #     messages=[
+        #         {"role": "system", "content": cl.user_session.get("current_prompt")},
+        #         {"role": "user", "content": user_input}
+        #     ],
+        #     temperature=0,
+        #     stream = True,
+        # )
+        # async for part in stream:
+        #     if token := part.choices[0].delta.content :  # Assuming `.text` or similar attribute holds the response part
+        #         await msg.stream_token(token)
+        response = model.generate_content(
+            contents=f'''{cl.user_session.get("history_message")}''',
+            stream=True)
+        for chunk in response:
+            await msg.stream_token(chunk.candidates[0].content.parts[0].text)
+        cl.user_session.set("history_message",cl.user_session.get("history_message")+response.candidates[0].content.parts[0].text)
         
         await msg.update()
+        
 
-        grade = await client.chat.completions.create(
-            model="moonshot-v1-8k",
-            messages=[
-                {"role": "system", "content": cl.user_session.get("grade_prompt")},
-                {"role": "user", "content": user_input}
-            ],
-            temperature=0,
-            stream = False,
-        )
-        print(grade.choices[0].message.content)
-        score,result = extract_last_bracket_number_and_preceding_text(grade.choices[0].message.content)
+        # grade = await client.chat.completions.create(
+        #     model="moonshot-v1-8k",
+        #     messages=[
+        #         {"role": "system", "content": cl.user_session.get("grade_prompt")},
+        #         {"role": "user", "content": user_input}
+        #     ],
+        #     temperature=0,
+        #     stream = False,
+        # )
+        # print(grade.choices[0].message.content)
+        # score,result = extract_last_bracket_number_and_preceding_text(grade.choices[0].message.content)
+        response = model.generate_content(
+            contents=f'''{temp}{cl.user_session.get("grade_prompt")}''')
+        print(response.candidates[0].content.parts[0].text)
+        score,result = extract_last_bracket_number_and_preceding_text(response.candidates[0].content.parts[0].text)
+        print(cl.user_session.get("history_message"))
         if score == None:
             score = 0
         score_msg = cl.Message(content="")
