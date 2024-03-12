@@ -127,7 +127,7 @@ async def on_message(message: cl.Message):
         response = model.generate_content(
             contents=f'''{cl.user_session.get("history_message")}''',
             stream=True)
-        for chunk in response:
+        async for chunk in response:
             await msg.stream_token(chunk.candidates[0].content.parts[0].text)
         cl.user_session.set("history_message",cl.user_session.get("history_message")+response.candidates[0].content.parts[0].text)
         
@@ -146,7 +146,7 @@ async def on_message(message: cl.Message):
         # print(grade.choices[0].message.content)
         # score,result = extract_last_bracket_number_and_preceding_text(grade.choices[0].message.content)
         response = model.generate_content(
-            contents=f'''{temp}{cl.user_session.get("grade_prompt")}''')
+            contents=f'''{temp}{message.content}{cl.user_session.get("grade_prompt")}''')
         print(response.candidates[0].content.parts[0].text)
         score,result = extract_last_bracket_number_and_preceding_text(response.candidates[0].content.parts[0].text)
         print(cl.user_session.get("history_message"))
