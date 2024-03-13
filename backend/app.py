@@ -100,10 +100,10 @@ async def on_message(message: cl.Message):
         
         cl.user_session.set("current_prompt", prompt)
         cl.user_session.set("grade_prompt", grade_prompt)
-        cl.user_session.set("history_message",cl.user_session.get("current_prompt"))
+        cl.user_session.set("history_message","System: "+cl.user_session.get("current_prompt")+"\n")
     else:
         temp = cl.user_session.get("history_message")
-        cl.user_session.set("history_message",cl.user_session.get("history_message")+message.content)
+        cl.user_session.set("history_message",cl.user_session.get("history_message")+"\n"+"User: "+message.content+"\n")
         if(message.type == "user_message"):
             counter = cl.user_session.get("counter") + 1
             cl.user_session.set("counter", counter)
@@ -127,9 +127,9 @@ async def on_message(message: cl.Message):
         response = model.generate_content(
             contents=f'''{cl.user_session.get("history_message")}''',
             stream=True)
-        async for chunk in response:
+        for chunk in response:
             await msg.stream_token(chunk.candidates[0].content.parts[0].text)
-        cl.user_session.set("history_message",cl.user_session.get("history_message")+response.candidates[0].content.parts[0].text)
+        cl.user_session.set("history_message",cl.user_session.get("history_message")+"\n"+"System: "+response.candidates[0].content.parts[0].text+"\n")
         
         await msg.update()
         
@@ -146,7 +146,7 @@ async def on_message(message: cl.Message):
         # print(grade.choices[0].message.content)
         # score,result = extract_last_bracket_number_and_preceding_text(grade.choices[0].message.content)
         response = model.generate_content(
-            contents=f'''{temp}{message.content}{cl.user_session.get("grade_prompt")}''')
+            contents=f'''History: {temp} \n User: {message.content} \n Prompt: {cl.user_session.get("grade_prompt")}''')
         print(response.candidates[0].content.parts[0].text)
         score,result = extract_last_bracket_number_and_preceding_text(response.candidates[0].content.parts[0].text)
         print(cl.user_session.get("history_message"))
@@ -181,7 +181,7 @@ def determine_prompt(id,difficulty_value):
     if id == "1":
         return f'''你是一个高级面试机器人，专为评估潜在的{difficulty}GoLang工程师的技术能力、项目经验、沟通能力和问题解决能力以及对职位的兴趣和热情而设计。
             你的主要任务是通过一个设计精良的问题，深入了解候选人的技术背景、解决问题的能力、以往的项目经验以及他们对于这个职位的兴趣和热情。
-            此外，每次回答之后，你需要根据候选人的回答内容和质量，仅仅提出一个新的、更深入的问题，以进一步评估候选人的能力。
+            此外，每次回答之后，你需要根据候选人的回答内容和质量，仅仅提出一个更深入的问题，以进一步评估候选人的能力。
             在进行对话时，请遵循以下标准：
             - 限制提出问题的数量，保证每轮只能提出一个关键重点问题，这样候选人更有效的去答复'''
     elif id == "2":
