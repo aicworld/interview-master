@@ -51,7 +51,7 @@ from chainlit.oauth_providers import get_configured_oauth_providers
 from chainlit.step import Step, step
 from chainlit.sync import make_async, run_sync
 from chainlit.telemetry import trace
-from chainlit.types import Progress, ThreadDict
+from chainlit.types import ChatProfile, ThreadDict
 from chainlit.user import PersistedUser, User
 from chainlit.user_session import user_session
 from chainlit.utils import make_module_getattr, wrap_user_function
@@ -191,16 +191,16 @@ def on_chat_resume(func: Callable[[ThreadDict], Any]) -> Callable:
 
 @trace
 def set_chat_profiles(
-    func: Callable[[Optional["User"]], List["Progress"]]
+    func: Callable[[Optional["User"]], List["ChatProfile"]]
 ) -> Callable:
     """
     Programmatic declaration of the available chat profiles (can depend on the User from the session if authentication is setup).
 
     Args:
-        func (Callable[[Optional["User"]], List["Progress"]]): The function declaring the chat profiles.
+        func (Callable[[Optional["User"]], List["ChatProfile"]]): The function declaring the chat profiles.
 
     Returns:
-        Callable[[Optional["User"]], List["Progress"]]: The decorated function.
+        Callable[[Optional["User"]], List["ChatProfile"]]: The decorated function.
     """
 
     config.code.set_chat_profiles = wrap_user_function(func)

@@ -134,10 +134,11 @@ class Theme(str, Enum):
 
 
 @dataclass
-class Progress(DataClassJsonMixin):
+class ChatProfile(DataClassJsonMixin):
     """Specification for a chat profile that can be chosen by the user at the thread start."""
-    current_number: int
-    total_number: int
+    name: str
+    markdown_description: str
+    icon: Optional[str] = None
 
 
 FeedbackStrategy = Literal["BINARY"]

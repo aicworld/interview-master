@@ -22,7 +22,7 @@ client = AsyncOpenAI(
     base_url="https://api.moonshot.cn/v1",
 )
 
-genai.configure(api_key=os.getenv('GeminiKey'))
+genai.configure(api_key=os.getenv('GeminiKey'),transport='rest')
 model = genai.GenerativeModel('gemini-pro')
 def get_db_connection():
     conn = sqlite3.connect('app.db')
@@ -65,25 +65,26 @@ async def get_scenarios():
 
 @cl.on_chat_start
 async def on_chat_start():
-    user_input = input("请输入Kimichat或Gemini: ")
-    if(user_input == "Gemini"):
-        cl.user_session.set("AI","Gemini")
     cl.user_session.set("counter", 0)
     cl.user_session.set("score", 0)
     cl.user_session.set("total_score", 0)
     cl.user_session.set("history_message","")
     await cl.Message(content="你好 请介绍下你自己").send()
 
-@cl.set_chat_profiles
-async def chat_profile(score=None):
-    # Set current_number to score if score is not None, else set it to 10
-    current_number = score if score is not None else 10
-    return [
-        # cl.Progress(
-        #     current_number=current_number,
-        #     total_number=100,
-        # ),
-    ]
+# @cl.set_chat_profiles
+# async def chat_profile():
+#     return [
+#         cl.ChatProfile(
+#             name="Kimichat",
+#             markdown_description="The underlying LLM model is **Kimichat**.",
+#             icon="https://picsum.photos/250",
+#         ),
+#         cl.ChatProfile(
+#             name="Gemini",
+#             markdown_description="The underlying LLM model is **Gemini**.",
+#             icon="https://picsum.photos/200",
+#         ),
+#     ]
 
 
 def extract_last_bracket_number_and_preceding_text(text):
@@ -117,7 +118,7 @@ async def on_message(message: cl.Message):
         await msg.set_round(counter)
         await msg.send()
 
-        if(cl.user_session.get("AI")=="Gemini"):
+        if(cl.user_session.get("chat_profile")=="Gemini"):
             response = model.generate_content(
                 contents=f'''{cl.user_session.get("history_message")}''',
                 stream=True)
