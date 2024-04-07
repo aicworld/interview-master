@@ -14,7 +14,7 @@ from starlette.datastructures import Headers
 
 if TYPE_CHECKING:
     from chainlit.action import Action
-    from chainlit.types import Progress, ThreadDict
+    from chainlit.types import ChatProfile, ThreadDict
     from chainlit.user import User
     from fastapi import Request, Response
 
@@ -226,7 +226,7 @@ class CodeSettings:
     on_message: Optional[Callable[[str], Any]] = None
     author_rename: Optional[Callable[[str], str]] = None
     on_settings_update: Optional[Callable[[Dict[str, Any]], Any]] = None
-    set_chat_profiles: Optional[Callable[[Optional["User"]], List["Progress"]]] = (
+    set_chat_profiles: Optional[Callable[[Optional["User"]], List["ChatProfile"]]] = (
         None
     )
 
