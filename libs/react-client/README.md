@@ -43,7 +43,7 @@ This hook is responsible for managing the chat session's connection to the WebSo
 ```jsx
 import { ChainlitAPI, useChatSession } from '@chainlit/react-client';
 
-const CHAINLIT_SERVER_URL = 'http://localhost:8000';
+const CHAINLIT_SERVER_URL = 'http://localhost:80';
 
 const apiClient = new ChainlitAPI(CHAINLIT_SERVER_URL, 'app');
 
@@ -57,7 +57,7 @@ const ChatComponent = () => {
       userEnv: {
         /* user environment variables */
       },
-      accessToken: 'Bearer YOUR_ACCESS_TOKEN' // Optional Chainlit auth token
+      accessToken: 'Bearer YOUR_ACCESS_TOKEN', // Optional Chainlit auth token
     });
 
     return () => {
