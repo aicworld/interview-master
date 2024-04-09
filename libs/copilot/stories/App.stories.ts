@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     config: {
-      chainlitServer: 'http://localhost:80'
+      chainlitServer: 'http://localhost:8000'
     }
   }
 };
@@ -30,7 +30,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     config: {
-      chainlitServer: 'http://localhost:80',
+      chainlitServer: 'http://localhost:8000',
       theme: 'dark',
       fontFamily: '"Nunito Sans"',
       button: {

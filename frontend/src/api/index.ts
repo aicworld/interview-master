@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 
 import { ChainlitAPI, ClientError } from '@chainlit/react-client';
 
-const devServer = 'http://localhost:80';
+const devServer = 'http://localhost:8000';
 const url = import.meta.env.DEV ? devServer : window.origin;
 const serverUrl = new URL(url);
 
