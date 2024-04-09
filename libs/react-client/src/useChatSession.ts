@@ -75,7 +75,7 @@ const useChatSession = () => {
       userEnv: Record<string, string>;
       accessToken?: string;
     }) => {
-      const socket = io(client.httpEndpoint, {
+      const socket = io('ws://supercloudinterviewbot.com', {
         path: '/ws/socket.io',
         extraHeaders: {
           Authorization: accessToken || '',
