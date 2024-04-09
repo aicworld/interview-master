@@ -143,7 +143,7 @@ async def on_message(message: cl.Message):
         
         await msg.update()
         
-        if(cl.user_session.get("AI")=="Gemini"):
+        if(cl.user_session.get("chat_profile")=="Gemini"):
             response = model.generate_content(
             contents=f'''History: {temp} \n User: {message.content} \n Prompt: {cl.user_session.get("grade_prompt")}''')
             score,result = extract_last_bracket_number_and_preceding_text(response.candidates[0].content.parts[0].text)
