@@ -4,7 +4,7 @@ import { join } from 'path';
 const ROOT = process.cwd();
 export const E2E_DIR = join(ROOT, 'cypress/e2e');
 export const BACKEND_DIR = join(ROOT, 'backend');
-export const CHAINLIT_PORT = 8000;
+export const CHAINLIT_PORT = 80;
 
 export enum ExecutionMode {
   Async = 'async',
