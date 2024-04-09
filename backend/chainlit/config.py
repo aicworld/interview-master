@@ -136,8 +136,8 @@ generated_by = "{__version__}"
 """
 
 
-DEFAULT_HOST = "supercloudinterviewbot.com"
-DEFAULT_PORT = 80
+DEFAULT_HOST = "0.0.0.0"
+DEFAULT_PORT = 8000
 
 
 @dataclass()
