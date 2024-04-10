@@ -27,7 +27,7 @@ export default function Choose() {
   };
 
   // 行业选择
-  const dropdownOptions = ['技术', '产品', '设计', '销售','工程'];
+  const dropdownOptions = ['技术', '产品', '设计', '销售', '工程'];
 
   // 难度选择
   const [level, setLevel] = useState('easy');
@@ -50,10 +50,7 @@ export default function Choose() {
         <main>
           {/* 首页图片 */}
           <div style={{ marginTop: '20px', textAlign: 'center' }}>
-            <img
-              src="/to_peak.jpg"
-              style={{ width: '70%', height: 'auto' }}
-            />
+            <img src="/to_peak.jpg" style={{ width: '70%', height: 'auto' }} />
           </div>
           <h1 style={{ fontSize: '1.125rem', lineHeight: '1.75rem' }}>
             👏 欢迎使用Interview AI
@@ -142,7 +139,7 @@ export default function Choose() {
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
                 // onClick={() => handleChooseInterview({ id: 1, title: 'Golang工程师模拟面试' })}
-                onClick={() => handleChooseInterview(1, 'Golang工程师模拟面试' )}
+                onClick={() => handleChooseInterview(1, 'Golang工程师模拟面试')}
               >
                 Golang工程师模拟面试
               </Button>
@@ -187,7 +184,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(5, '道路工程师模拟面试')}
+                onClick={() => handleChooseInterview(6, '道路工程师模拟面试')}
               >
                 道路工程师模拟面试
               </Button>
@@ -196,7 +193,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(5, '桥梁工程师模拟面试')}
+                onClick={() => handleChooseInterview(7, '桥梁工程师模拟面试')}
               >
                 桥梁工程师模拟面试
               </Button>
@@ -205,7 +202,7 @@ export default function Choose() {
               .length > 0 && (
               <Button
                 variant={interviewChooseSelected ? 'contained' : 'outlined'} // 根据选中状态应用不同的样式
-                onClick={() => handleChooseInterview(5, '排水工程师模拟面试')}
+                onClick={() => handleChooseInterview(8, '排水工程师模拟面试')}
               >
                 排水工程师模拟面试
               </Button>
